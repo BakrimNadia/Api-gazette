@@ -1,9 +1,9 @@
 import { Model, DataTypes } from "sequelize";
 import sequelize from "../database.js";
 
-export class Article extends Model {}
+export class Anouncement extends Model {}
 
-Article.init(
+Anouncement.init(
     {
   id: { 
     type: DataTypes.INTEGER, 
@@ -14,7 +14,7 @@ Article.init(
     type: DataTypes.STRING, 
     allowNull: false 
   }, 
-  subtitle: { 
+  author: { 
     type: DataTypes.STRING, 
     allowNull: true 
   }, 
@@ -29,6 +29,6 @@ Article.init(
 },
 {
     sequelize,
-    tableName: "article",
+    tableName: "anouncement",
   }
 );
