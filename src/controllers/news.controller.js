@@ -25,6 +25,7 @@ const newsController = {
     const {
       picture,
       title,
+      subtitle,
       author,
       content,
       date_publication,
@@ -32,6 +33,7 @@ const newsController = {
     if (
       !picture ||
       !title ||
+      !subtitle ||
       !author ||
       !content ||
       !date_publication
@@ -44,6 +46,7 @@ const newsController = {
     const newNews = {
       picture,
       title,
+      subtitle,
       author,
       content,
       date_publication: date_publication,
@@ -62,6 +65,7 @@ const newsController = {
     const {
       picture,
       title,
+      subtitle,
       author,
       content,
       date_publication,
@@ -76,6 +80,7 @@ const newsController = {
     const updateNews = await News.update({
       picture,
       title,
+      subtitle,
       author,
       content,
       date_publication: date_publication,

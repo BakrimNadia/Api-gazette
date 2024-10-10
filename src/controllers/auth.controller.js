@@ -21,7 +21,6 @@ const authController = {
       !email ||
       !lastname ||
       !firstname ||
-      !birthdate ||
       !password ||
       !confirmPassword ||
       !role

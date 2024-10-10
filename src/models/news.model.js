@@ -13,6 +13,10 @@ News.init(
     type: DataTypes.STRING(255), 
     allowNull: false 
   }, 
+  subtitle: { 
+    type: DataTypes.STRING(255), 
+    allowNull: true 
+  },
   author: { 
     type: DataTypes.STRING(255), 
     allowNull: true 
