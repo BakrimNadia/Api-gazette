@@ -35,6 +35,7 @@ const userController = {
     }
 
     const {
+      avatar,
       lastname,
       firstname,
       email,
@@ -42,7 +43,7 @@ const userController = {
       role,
     } = req.body;
     if (
-      
+      !avatar ||
       !lastname ||
       !firstname ||
       !email ||
@@ -55,7 +56,7 @@ const userController = {
     }
 
     const updatedUser = {
-      
+      avatar,
       lastname,
       firstname,
       email,
