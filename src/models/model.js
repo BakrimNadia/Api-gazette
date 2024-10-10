@@ -1,0 +1,1 @@
+export { User, Article, News, Announcement, sequelize } from './associations.js';
