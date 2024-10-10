@@ -5,17 +5,16 @@ export class Article extends Model {}
 
 Article.init(
     {
-  id: { 
-    type: DataTypes.INTEGER, 
-    autoIncrement: true, 
-    primaryKey: true 
-  }, 
+  picture: {
+    type: DataTypes.STRING(255),
+    allowNull: true
+  },
   title: { 
-    type: DataTypes.STRING, 
+    type: DataTypes.STRING(255), 
     allowNull: false 
   }, 
   subtitle: { 
-    type: DataTypes.STRING, 
+    type: DataTypes.STRING(255), 
     allowNull: true 
   }, 
   content: { 
@@ -23,8 +22,9 @@ Article.init(
     allowNull: false 
   }, 
   date_publication: { 
-    type: DataTypes.DATE, 
-    defaultValue: DataTypes.NOW 
+    type: DataTypes.DATE,
+    defaultValue: DataTypes.NOW,
+    allowNull: false,
   } 
 },
 {

@@ -4,18 +4,17 @@ import sequelize from "../database.js";
 export class Announcement extends Model {}
 
 Announcement.init(
-    {
-  id: { 
-    type: DataTypes.INTEGER, 
-    autoIncrement: true, 
-    primaryKey: true 
-  }, 
+  {
+  picture: {
+    type: DataTypes.STRING(255),
+    allowNull: true
+  },
   title: { 
-    type: DataTypes.STRING, 
+    type: DataTypes.STRING(255), 
     allowNull: false 
   }, 
   author: { 
-    type: DataTypes.STRING, 
+    type: DataTypes.STRING(255), 
     allowNull: true 
   }, 
   content: { 
@@ -23,8 +22,9 @@ Announcement.init(
     allowNull: false 
   }, 
   date_publication: { 
-    type: DataTypes.DATE, 
-    defaultValue: DataTypes.NOW 
+    type: DataTypes.DATE,
+    defaultValue: DataTypes.NOW,
+    allowNull: false,
   } 
 },
 {
