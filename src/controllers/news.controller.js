@@ -88,6 +88,26 @@ const newsController = {
 
     res.json(updateNews);
   },
+
+  delete: async (req, res) => {
+    const newsId = parseInt(req.params.id);
+
+    if (!newsId) {
+      return res.status(404).json({ error: "id inconnu" });
+    }
+
+    const news = await News.findByPk(newsId);
+
+    if (!news) {
+      return res.status(404).json({ error: "Note d'information inconnue" });
+    }
+
+    await News.destroy({
+      where: { id: newsId },
+    });
+
+    res.status(200).json({ message: "Note d'information supprimée avec succès" });
+  },
 };
 
 export default newsController;

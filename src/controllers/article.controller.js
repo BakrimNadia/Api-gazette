@@ -88,6 +88,26 @@ const articleController = {
 
     res.json(updateArticle);
   },
+
+  delete: async (req, res) => {
+    const articleId = parseInt(req.params.id);
+
+    if (!articleId) {
+      return res.status(404).json({ error: "id inconnu" });
+    }
+
+    const article = await Article.findByPk(articleId);
+
+    if (!article) {
+      return res.status(404).json({ error: "article inconnue" });
+    }
+
+    await Article.destroy({
+      where: { id: articleId },
+    });
+
+    res.status(200).json({ message: "Article supprimée avec succès" });
+  },
 };
 
 export default articleController;
