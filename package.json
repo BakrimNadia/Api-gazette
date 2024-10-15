@@ -5,8 +5,11 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
+    "start": "node src/server.js",
     "dev": "nodemon src/server.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "db:create": "node src/migrations/create-tables.js",
+    "db:seed": "node src/migrations/seed-tables.js",
+    "db:reset": "npm run db:create && npm run db:seed"
   },
   "keywords": [],
   "author": "",

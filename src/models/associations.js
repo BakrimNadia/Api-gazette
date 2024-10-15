@@ -10,7 +10,7 @@ User.hasMany(News, {
 });
   
 News.belongsTo(User, {
-    as: 'author',
+    as: 'newsAuthor',
     foreignKey: 'id_user',
 });
   
@@ -20,7 +20,7 @@ User.hasMany(Article, {
 });
   
 Article.belongsTo(User, {
-    as: 'author',
+    as: 'articleAuthor',
     foreignKey: 'id_user',
 });
   
@@ -30,8 +30,8 @@ User.hasMany(Announcement, {
 });
   
 Announcement.belongsTo(User, {
-    as: 'author',
+    as: 'announcementAuthor',
     foreignKey: 'id_user',
 });
-  
+
 export { User, News, Article, Announcement, sequelize };
