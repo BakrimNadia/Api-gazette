@@ -31,7 +31,6 @@ const newsController = {
       date_publication,
     } = req.body;
     if (
-      !picture ||
       !title ||
       !subtitle ||
       !author ||
