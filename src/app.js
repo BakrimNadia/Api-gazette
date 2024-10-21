@@ -10,7 +10,11 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use(cors());
+app.use(cors({
+  origin: 'http://localhost:3000', // Remplace par l'URL de ton frontend
+  methods: ['GET', 'POST', 'PATCH', 'DELETE', 'OPTIONS'],
+  credentials: true
+}));
 
 app.get("/", (req, res) => {
   res.json({
