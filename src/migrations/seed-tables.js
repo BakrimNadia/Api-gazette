@@ -5,7 +5,7 @@ import { News, Article, Announcement, User } from "../models/associations.js";
 console.log("Création des données...");
 
 await News.create({
-  picture: "images/pause-cafe2.png",
+  picture: "https://www.image-heberg.fr/files/17295459192679549565.png",
   title: "Nouvelle salle de pause",
   subtitle: "Ouverture de la nouvelle salle de pause",
   author: "Léo jean",
@@ -14,7 +14,7 @@ await News.create({
 });
 
 await News.create({
-    picture: "images/entretien.png",
+    picture: "https://www.image-heberg.fr/files/17295457472603778875.png",
     title: "Salle d'entretien rénovée",
     subtitle: "Agrandissement et rafraîchissement",
     author: "Amal Nina",
@@ -23,7 +23,7 @@ await News.create({
   });
 
   await News.create({
-    picture: "images/reunion.png",
+    picture: "https://www.image-heberg.fr/files/17295458873325899380.png",
     title: "Réunion le vendredi 15 octobre",
     subtitle: "Objet : nouveau fournisseur",
     author: "Ricardo Milo",
@@ -32,7 +32,7 @@ await News.create({
   });
 
   await News.create({
-    picture: "images/photocopieuse.jpeg",
+    picture: "https://www.image-heberg.fr/files/1729545858805626359.jpg",
     title: "Concernant la photocopieuse",
     subtitle: "Evitons les pannes inutiles",
     author: "Rachel Dany",
@@ -41,7 +41,7 @@ await News.create({
   });
 
   await News.create({
-    picture: "/images/statistique.png",
+    picture: "https://www.image-heberg.fr/files/17295459404289769446.png",
     title: "Bonne nouvelle !",
     subtitle: "Notre CA est en croissance cette année",
     author: "Aly Keyna",
