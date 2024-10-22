@@ -4,12 +4,13 @@ import { News, Article, Announcement, User } from "../models/associations.js";
 
 console.log("Création des données...");
 
+
 await News.create({
   picture: "https://www.image-heberg.fr/files/17295459192679549565.png",
   title: "Nouvelle salle de pause",
   subtitle: "Ouverture de la nouvelle salle de pause",
   author: "Léo jean",
-  content: "Ouverture de la nouvelle salle de pause",
+  content: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Magnam provident aut, quidem voluptatibus inventore iusto officia! Saepe rerum officiis, deserunt beatae sunt delectus deleniti, facilis neque perspiciatis ratione vero laudantium quo velit nisi quam numquam quidem, amet in voluptates. Optio enim odio aliquam error vitae facilis fugiat ipsam. Iusto voluptatum odio harum veniam, minima inventore obcaecati cupiditate laborum alias est?Lorem ipsum dolor, sit amet consectetur adipisicing elit. Magnam provident aut, quidem voluptatibus inventore iusto officia! Saepe rerum officiis, deserunt beatae sunt delectus deleniti, facilis neque perspiciatis ratione vero laudantium quo velit nisi ",
   date_publication: new Date("2024-05-21"),
 });
 
@@ -18,7 +19,7 @@ await News.create({
     title: "Salle d'entretien rénovée",
     subtitle: "Agrandissement et rafraîchissement",
     author: "Amal Nina",
-    content: "Agrandissement et rafraîchissement",
+    content: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Magnam provident aut, quidem voluptatibus inventore iusto officia! Saepe rerum officiis, deserunt beatae sunt delectus deleniti, facilis neque perspiciatis ratione vero laudantium quo velit nisi quam numquam quidem, amet in voluptates. Optio enim odio aliquam error vitae facilis fugiat ipsam. Iusto voluptatum odio harum veniam, minima inventore obcaecati cupiditate laborum alias est?Lorem ipsum dolor, sit amet consectetur adipisicing elit. Magnam provident aut, quidem voluptatibus inventore iusto officia! Saepe rerum officiis, deserunt beatae sunt delectus deleniti, facilis neque perspiciatis ratione vero laudantium quo velit nisi",
     date_publication: new Date("2024-05-21"),
   });
 
@@ -27,7 +28,7 @@ await News.create({
     title: "Réunion le vendredi 15 octobre",
     subtitle: "Objet : nouveau fournisseur",
     author: "Ricardo Milo",
-    content: "changement de fournisseur",
+    content: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Magnam provident aut, quidem voluptatibus inventore iusto officia! Saepe rerum officiis, deserunt beatae sunt delectus deleniti, facilis neque perspiciatis ratione vero laudantium quo velit nisi quam numquam quidem, amet in voluptates. Optio enim odio aliquam error vitae facilis fugiat ipsam. Iusto voluptatum odio harum veniam, minima inventore obcaecati cupiditate laborum alias est?Lorem ipsum dolor, sit amet consectetur adipisicing elit. Magnam provident aut, quidem voluptatibus inventore iusto officia! Saepe rerum officiis, deserunt beatae sunt delectus deleniti, facilis neque perspiciatis ratione vero laudantium quo velit nisi",
     date_publication: new Date("2024-05-21"),
   });
 
@@ -36,7 +37,7 @@ await News.create({
     title: "Concernant la photocopieuse",
     subtitle: "Evitons les pannes inutiles",
     author: "Rachel Dany",
-    content: "Evitons les pannes inutiles",
+    content: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Magnam provident aut, quidem voluptatibus inventore iusto officia! Saepe rerum officiis, deserunt beatae sunt delectus deleniti, facilis neque perspiciatis ratione vero laudantium quo velit nisi quam numquam quidem, amet in voluptates. Optio enim odio aliquam error vitae facilis fugiat ipsam. Iusto voluptatum odio harum veniam, minima inventore obcaecati cupiditate laborum alias est?Lorem ipsum dolor, sit amet consectetur adipisicing elit. Magnam provident aut, quidem voluptatibus inventore iusto officia! Saepe rerum officiis, deserunt beatae sunt delectus deleniti, facilis neque perspiciatis ratione vero laudantium quo velit nisi",
     date_publication: new Date("2024-05-21"),
   });
 
@@ -45,7 +46,7 @@ await News.create({
     title: "Bonne nouvelle !",
     subtitle: "Notre CA est en croissance cette année",
     author: "Aly Keyna",
-    content: "Notre CA est en croissance cette année",
+    content: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Magnam provident aut, quidem voluptatibus inventore iusto officia! Saepe rerum officiis, deserunt beatae sunt delectus deleniti, facilis neque perspiciatis ratione vero laudantium quo velit nisi quam numquam quidem, amet in voluptates. Optio enim odio aliquam error vitae facilis fugiat ipsam. Iusto voluptatum odio harum veniam, minima inventore obcaecati cupiditate laborum alias est?Lorem ipsum dolor, sit amet consectetur adipisicing elit. Magnam provident aut, quidem voluptatibus inventore iusto officia! Saepe rerum officiis, deserunt beatae sunt delectus deleniti, facilis neque perspiciatis ratione vero laudantium quo velit nisi",
     date_publication: new Date("2024-05-21"),
   });
 
