@@ -71,7 +71,7 @@ await Article.create({
   await Article.create({
     picture: "https://www.image-heberg.fr/files/17301961911725896866.jpg",
     title: "Prendre soin de nos animaux",
-    subtitle: "Concilier travail et temps pour nos amis à 4 pattes",
+    subtitle: "Avoir un animal est-ce compliqué ?",
     author: "Aly Keyna",
     content: "Concilier travail et temps pour nos amis à 4 pattes, Lorem ipsum dolor, sit amet consectetur adipisicing elit. Magnam provident aut, quidem voluptatibus inventore iusto officia! Saepe rerum officiis, deserunt beatae sunt delectus deleniti, facilis neque perspiciatis ratione vero laudantium quo velit nisi quam numquam quidem, amet in voluptates. Optio enim odio aliquam error vitae facilis fugiat ipsam. Iusto voluptatum odio harum veniam, minima inventore obcaecati cupiditate laborum alias est?Lorem ipsum dolor, sit amet consectetur adipisicing elit. Magnam provident aut, quidem voluptatibus inventore iusto officia! Saepe rerum officiis, deserunt beatae sunt delectus deleniti, facilis neque perspiciatis ratione vero laudantium quo velit nisi",
     date_publication: new Date("2024-05-21"),
