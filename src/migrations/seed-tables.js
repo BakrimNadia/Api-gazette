@@ -154,7 +154,7 @@ const nbOfSaltRounds = parseInt(process.env.NB_OF_SALT_ROUNDS) || 10;
 const hashedPassword = await bcrypt.hash(password, nbOfSaltRounds);
 
 await User.create({
-  avatar: "",
+  avatar: "https://www.image-heberg.fr/files/1730816824593074177.png",
   email: "nadiabakrim06@gmail.com",
   lastname: "BAKRIM",
   firstname: "Nadia",
@@ -163,7 +163,7 @@ await User.create({
 });
 
 await User.create({
-  avatar: "",
+  avatar: "https://www.image-heberg.fr/files/17308168724247201270.png",
   email: "nadia_lina@hotmail.com",
   lastname: "BAK",
   firstname: "Nina",
