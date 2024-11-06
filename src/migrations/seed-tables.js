@@ -167,7 +167,6 @@ await User.create({
   email: "nadia_lina@hotmail.com",
   lastname: "BAK",
   firstname: "Nina",
-  birthdate: new Date("1983-02-07"),
   password: hashedPassword,
   role: "Employee",
 

@@ -60,7 +60,6 @@ const userController = {
       lastname,
       firstname,
       email,
-      birthdate,
       password,
       role,
     };
