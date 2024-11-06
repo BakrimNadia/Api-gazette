@@ -6,14 +6,14 @@ const userController = {
     res.json(userList);
   },
 
-  getByEmail: async (req, res) => {
-    const email = req.body.email;
+  getById: async (req, res) => {
+    const userId = parseInt(req.params.id);
 
-    if (!email) {
-      return res.status(404).json({ error: "cet email n'existe pas" });
+    if (!userId) {
+      return res.status(404).json({ error: "ID invalide" });
     }
 
-    const user = await User.findOne({ where: { email } });
+    const user = await User.findByPk(userId);
 
     if (!user) {
       return res.status(404).json({ error: "Utilisateur inconnu" });
