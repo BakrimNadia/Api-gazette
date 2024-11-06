@@ -160,6 +160,7 @@ await User.create({
   firstname: "Nadia",
   password: hashedPassword,
   role: "Admin",
+  is_active: true,
 });
 
 await User.create({
@@ -169,5 +170,6 @@ await User.create({
   firstname: "Nina",
   password: hashedPassword,
   role: "Employee",
+  is_active: true,
 
 });
