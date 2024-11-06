@@ -15,6 +15,7 @@ const authController = {
       password,
       confirmPassword,
       role,
+      is_active,
     } = req.body;
 
     if (
@@ -57,6 +58,7 @@ const authController = {
       firstname,
       password: hashedPassword,
       role,
+      is_active: true,
     });
 
     res.status(200).json("succesfully create user");

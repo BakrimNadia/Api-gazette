@@ -41,6 +41,7 @@ const userController = {
       email,
       password,
       role,
+      is_active,
     } = req.body;
     if (
       !avatar ||
@@ -48,7 +49,8 @@ const userController = {
       !firstname ||
       !email ||
       !password ||
-      !role
+      !role ||
+      !is_active
     ) {
       return res
         .status(400)
@@ -62,6 +64,7 @@ const userController = {
       email,
       password,
       role,
+      is_active,
     };
 
     try {
