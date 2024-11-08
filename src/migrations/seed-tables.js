@@ -6,7 +6,7 @@ console.log("Création des données...");
 
 
 await News.create({
-  picture: "https://www.image-heberg.fr/files/17295459192679549565.png",
+  picture: "https://www.image-heberg.fr/files/17310573941024747351.png",
   title: "Nouvelle salle de pause",
   subtitle: "Ouverture de la nouvelle salle de pause",
   author: "Léo jean",
@@ -15,7 +15,7 @@ await News.create({
 });
 
 await News.create({
-    picture: "https://www.image-heberg.fr/files/17295457472603778875.png",
+    picture: "https://www.image-heberg.fr/files/17310595364089377106.jpg",
     title: "Salle d'entretien rénovée",
     subtitle: "Agrandissement et rafraîchissement",
     author: "Amal Nina",
@@ -24,7 +24,7 @@ await News.create({
   });
 
   await News.create({
-    picture: "https://www.image-heberg.fr/files/17295458873325899380.png",
+    picture: "https://www.image-heberg.fr/files/17310592731520636150.jpg",
     title: "Réunion le vendredi 15 octobre",
     subtitle: "Objet : nouveau fournisseur",
     author: "Ricardo Milo",
@@ -42,7 +42,7 @@ await News.create({
   });
 
   await News.create({
-    picture: "https://www.image-heberg.fr/files/17295459404289769446.png",
+    picture: "https://www.image-heberg.fr/files/17310597221303080975.jpg",
     title: "Bonne nouvelle !",
     subtitle: "Notre CA est en croissance cette année",
     author: "Aly Keyna",
