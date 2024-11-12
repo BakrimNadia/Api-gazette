@@ -6,7 +6,7 @@ console.log("Création des données...");
 
 
 await News.create({
-  picture: "https://www.image-heberg.fr/files/17310573941024747351.png",
+  picture: "https://www.image-heberg.fr/files/17314042252607362670.jpg",
   title: "Nouvelle salle de pause",
   subtitle: "Ouverture de la nouvelle salle de pause",
   author: "Léo jean",
@@ -33,7 +33,7 @@ await News.create({
   });
 
   await News.create({
-    picture: "https://www.image-heberg.fr/files/1729545858805626359.jpg",
+    picture: "https://www.image-heberg.fr/files/17314044972359921437.jpg",
     title: "Concernant la photocopieuse",
     subtitle: "Evitons les pannes inutiles",
     author: "Rachel Dany",
