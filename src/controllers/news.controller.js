@@ -1,24 +1,48 @@
 import { News } from "../models/news.model.js";
+import { User } from "../models/user.model.js";
 
 const newsController = {
   getAll: async (req, res) => {
-    const newsList = await News.findAll();
-    res.json(newsList);
+    try {
+      const newsList = await News.findAll({
+        include: [{
+          model: User,
+          as: 'newsAuthor',
+          attributes: ['firstname', 'lastname'], 
+        }]
+      });
+      res.json(newsList);
+    } catch (error) {
+      console.error("Erreur lors de la récupération des news :", error);
+      res.status(500).json({ error: "Erreur serveur" });
+    }
   },
 
   getById: async (req, res) => {
     const newsId = parseInt(req.params.id);
 
     if (!newsId) {
-      return res.status(404).json({ error: "id inconnu" });
+      return res.status(404).json({ error: "ID inconnu" });
     }
 
-    const news = await News.findByPk(newsId);
+    try {
+      const news = await News.findByPk(newsId, {
+        include: [{
+          model: User,
+          as: 'newsAuthor',
+          attributes: ['firstname', 'lastname'], 
+        }]
+      });
 
-    if (!news) {
-      return res.status(404).json({ error: "Note d'information inconnu" });
+      if (!news) {
+        return res.status(404).json({ error: "Note d'information inconnue" });
+      }
+
+      res.json(news);
+    } catch (error) {
+      console.error("Erreur lors de la récupération de la note d'information :", error);
+      res.status(500).json({ error: "Erreur serveur" });
     }
-    res.json(news);
   },
 
   insert: async (req, res) => {
@@ -26,86 +50,93 @@ const newsController = {
       picture,
       title,
       subtitle,
-      author,
+      user_id, 
       content,
       date_publication,
     } = req.body;
-    if (
-      !title ||
-      !subtitle ||
-      !author ||
-      !content ||
-      !date_publication
-    ) {
-      console.log("Tous les champs sont obligatoire");
-      return res
-        .status(400)
-        .json({ error: "Tous les champs sont obligatoire" });
+
+    if (!title || !subtitle || !user_id || !content || !date_publication) {
+      return res.status(400).json({ error: "Tous les champs sont obligatoires" });
     }
-    const newNews = {
-      picture,
-      title,
-      subtitle,
-      author,
-      content,
-      date_publication: date_publication,
-    };
-    await News.create(newNews);
-    res.status(201).json(newNews);
+
+    try {
+      const newNews = await News.create({
+        picture,
+        title,
+        subtitle,
+        user_id,
+        content,
+        date_publication,
+      });
+      res.status(201).json(newNews);
+    } catch (error) {
+      console.error("Erreur lors de l'insertion de la note d'information :", error);
+      res.status(500).json({ error: "Erreur serveur" });
+    }
   },
 
   update: async (req, res) => {
     const newsId = parseInt(req.params.id);
 
     if (!newsId) {
-      return res.status(404).json({ error: "id inconnu" });
+      return res.status(404).json({ error: "ID inconnu" });
     }
 
     const {
       picture,
       title,
       subtitle,
-      author,
+      user_id,
       content,
       date_publication,
     } = req.body;
 
-    const news = await News.findByPk(newsId);
+    try {
+      const news = await News.findByPk(newsId);
 
-    if (!news) {
-      return res.status(404).json({ error: "Note d'information inconnu" });
+      if (!news) {
+        return res.status(404).json({ error: "Note d'information inconnue" });
+      }
+
+      await news.update({
+        picture,
+        title,
+        subtitle,
+        user_id,
+        content,
+        date_publication,
+      });
+
+      res.json(news);
+    } catch (error) {
+      console.error("Erreur lors de la mise à jour de la note d'information :", error);
+      res.status(500).json({ error: "Erreur serveur" });
     }
-
-    const updateNews = await News.update({
-      picture,
-      title,
-      subtitle,
-      author,
-      content,
-      date_publication: date_publication,
-    });
-
-    res.json(updateNews);
   },
 
   delete: async (req, res) => {
     const newsId = parseInt(req.params.id);
 
     if (!newsId) {
-      return res.status(404).json({ error: "id inconnu" });
+      return res.status(404).json({ error: "ID inconnu" });
     }
 
-    const news = await News.findByPk(newsId);
+    try {
+      const news = await News.findByPk(newsId);
 
-    if (!news) {
-      return res.status(404).json({ error: "Note d'information inconnue" });
+      if (!news) {
+        return res.status(404).json({ error: "Note d'information inconnue" });
+      }
+
+      await News.destroy({
+        where: { id: newsId },
+      });
+
+      res.status(200).json({ message: "Note d'information supprimée avec succès" });
+    } catch (error) {
+      console.error("Erreur lors de la suppression de la note d'information :", error);
+      res.status(500).json({ error: "Erreur serveur" });
     }
-
-    await News.destroy({
-      where: { id: newsId },
-    });
-
-    res.status(200).json({ message: "Note d'information supprimée avec succès" });
   },
 };
 

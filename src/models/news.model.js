@@ -17,10 +17,6 @@ News.init(
     type: DataTypes.STRING(255), 
     allowNull: true 
   },
-  author: { 
-    type: DataTypes.STRING(255), 
-    allowNull: true 
-  }, 
   content: { 
     type: DataTypes.TEXT, 
     allowNull: false 
@@ -29,7 +25,15 @@ News.init(
     type: DataTypes.DATE,
     defaultValue: DataTypes.NOW,
     allowNull: false,
-  } 
+  }, 
+  user_id: { 
+    type: DataTypes.INTEGER,
+    allowNull: true,
+    references: {
+      model: 'user', 
+      key: 'id',    
+    },
+  },
 },
 {
     sequelize,

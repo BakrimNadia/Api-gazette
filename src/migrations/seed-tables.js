@@ -4,12 +4,69 @@ import { News, Article, Announcement, User } from "../models/associations.js";
 
 console.log("Création des données...");
 
+const password = "Az123456";
+const nbOfSaltRounds = parseInt(process.env.NB_OF_SALT_ROUNDS) || 10;
+const hashedPassword = await bcrypt.hash(password, nbOfSaltRounds);
+
+// Création des utilisateurs
+
+ await User.create({
+    avatar: "https://www.image-heberg.fr/files/1730816824593074177.png",
+    email: "nadiabakrim06@gmail.com",
+    lastname: "Bakrim",
+    firstname: "Nadia",
+    password: hashedPassword,
+    role: "Admin",
+    is_active: true,
+  }),
+  await User.create({
+    avatar: "https://www.image-heberg.fr/files/17308168724247201270.png",
+    email: "nadia_lina@hotmail.com",
+    lastname: "Dany",
+    firstname: "Rachel",
+    password: hashedPassword,
+    role: "Employee",
+    is_active: true,
+  }),
+  await User.create({
+    avatar: "https://www.image-heberg.fr/files/17314323393907223114.png",
+    email: "jean-leo@hotmail.com",
+    lastname: "Jean",
+    firstname: "Léo",
+    password: hashedPassword,
+    role: "Employee",
+    is_active: true,
+  }),
+  await User.create({
+    avatar: "https://www.image-heberg.fr/files/17314323393907223114.png",
+    email: "aly-keyna@hotmail.com",
+    lastname: "Aly",
+    firstname: "Keyna",
+    password: hashedPassword,
+    role: "Employee",
+    is_active: true,
+  }),
+  await User.create({
+    avatar: "https://www.image-heberg.fr/files/17314323393907223114.png",
+    email: "ricardo-milo@hotmail.com",
+    lastname: "Ricardo",
+    firstname: "Milo",
+    password: hashedPassword,
+    role: "Employee",
+    is_active: true,
+  })
+
+
+async function getUserIdByName(firstname, lastname) {
+  const user = await User.findOne({ where: { firstname, lastname } });
+  return user ? user.id : null;
+}
 
 await News.create({
   picture: "https://www.image-heberg.fr/files/17314042252607362670.jpg",
   title: "Nouvelle salle de pause",
   subtitle: "Ouverture de la nouvelle salle de pause",
-  author: "Léo jean",
+  user_id: await getUserIdByName("Léo", "Jean"),
   content: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Magnam provident aut, quidem voluptatibus inventore iusto officia! Saepe rerum officiis, deserunt beatae sunt delectus deleniti, facilis neque perspiciatis ratione vero laudantium quo velit nisi quam numquam quidem, amet in voluptates. Optio enim odio aliquam error vitae facilis fugiat ipsam. Iusto voluptatum odio harum veniam, minima inventore obcaecati cupiditate laborum alias est?Lorem ipsum dolor, sit amet consectetur adipisicing elit. Magnam provident aut, quidem voluptatibus inventore iusto officia! Saepe rerum officiis, deserunt beatae sunt delectus deleniti, facilis neque perspiciatis ratione vero laudantium quo velit nisi ",
   date_publication: new Date("2024-05-21"),
 });
@@ -18,7 +75,7 @@ await News.create({
     picture: "https://www.image-heberg.fr/files/17310595364089377106.jpg",
     title: "Salle d'entretien rénovée",
     subtitle: "Agrandissement et rafraîchissement",
-    author: "Amal Nina",
+    user_id: await getUserIdByName("Nadia", "Bakrim"),
     content: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Magnam provident aut, quidem voluptatibus inventore iusto officia! Saepe rerum officiis, deserunt beatae sunt delectus deleniti, facilis neque perspiciatis ratione vero laudantium quo velit nisi quam numquam quidem, amet in voluptates. Optio enim odio aliquam error vitae facilis fugiat ipsam. Iusto voluptatum odio harum veniam, minima inventore obcaecati cupiditate laborum alias est?Lorem ipsum dolor, sit amet consectetur adipisicing elit. Magnam provident aut, quidem voluptatibus inventore iusto officia! Saepe rerum officiis, deserunt beatae sunt delectus deleniti, facilis neque perspiciatis ratione vero laudantium quo velit nisi",
     date_publication: new Date("2024-05-21"),
   });
@@ -27,7 +84,7 @@ await News.create({
     picture: "https://www.image-heberg.fr/files/17310592731520636150.jpg",
     title: "Réunion le vendredi 15 octobre",
     subtitle: "Objet : nouveau fournisseur",
-    author: "Ricardo Milo",
+    user_id: await getUserIdByName("Milo", "Ricardo"),
     content: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Magnam provident aut, quidem voluptatibus inventore iusto officia! Saepe rerum officiis, deserunt beatae sunt delectus deleniti, facilis neque perspiciatis ratione vero laudantium quo velit nisi quam numquam quidem, amet in voluptates. Optio enim odio aliquam error vitae facilis fugiat ipsam. Iusto voluptatum odio harum veniam, minima inventore obcaecati cupiditate laborum alias est?Lorem ipsum dolor, sit amet consectetur adipisicing elit. Magnam provident aut, quidem voluptatibus inventore iusto officia! Saepe rerum officiis, deserunt beatae sunt delectus deleniti, facilis neque perspiciatis ratione vero laudantium quo velit nisi",
     date_publication: new Date("2024-05-21"),
   });
@@ -36,7 +93,7 @@ await News.create({
     picture: "https://www.image-heberg.fr/files/17314044972359921437.jpg",
     title: "Concernant la photocopieuse",
     subtitle: "Evitons les pannes inutiles",
-    author: "Rachel Dany",
+    author: await getUserIdByName("Rachel", "Dany"),
     content: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Magnam provident aut, quidem voluptatibus inventore iusto officia! Saepe rerum officiis, deserunt beatae sunt delectus deleniti, facilis neque perspiciatis ratione vero laudantium quo velit nisi quam numquam quidem, amet in voluptates. Optio enim odio aliquam error vitae facilis fugiat ipsam. Iusto voluptatum odio harum veniam, minima inventore obcaecati cupiditate laborum alias est?Lorem ipsum dolor, sit amet consectetur adipisicing elit. Magnam provident aut, quidem voluptatibus inventore iusto officia! Saepe rerum officiis, deserunt beatae sunt delectus deleniti, facilis neque perspiciatis ratione vero laudantium quo velit nisi",
     date_publication: new Date("2024-05-21"),
   });
@@ -45,7 +102,7 @@ await News.create({
     picture: "https://www.image-heberg.fr/files/17310597221303080975.jpg",
     title: "Bonne nouvelle !",
     subtitle: "Notre CA est en croissance cette année",
-    author: "Aly Keyna",
+    author: await getUserIdByName("Keyna", "Aly"),
     content: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Magnam provident aut, quidem voluptatibus inventore iusto officia! Saepe rerum officiis, deserunt beatae sunt delectus deleniti, facilis neque perspiciatis ratione vero laudantium quo velit nisi quam numquam quidem, amet in voluptates. Optio enim odio aliquam error vitae facilis fugiat ipsam. Iusto voluptatum odio harum veniam, minima inventore obcaecati cupiditate laborum alias est?Lorem ipsum dolor, sit amet consectetur adipisicing elit. Magnam provident aut, quidem voluptatibus inventore iusto officia! Saepe rerum officiis, deserunt beatae sunt delectus deleniti, facilis neque perspiciatis ratione vero laudantium quo velit nisi",
     date_publication: new Date("2024-05-21"),
   });
@@ -148,28 +205,3 @@ await Article.create({
     content: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Magnam provident aut, quidem voluptatibus",
     date_publication: new Date("2024-05-21"),
   });
-
-const password = "Az123456";
-const nbOfSaltRounds = parseInt(process.env.NB_OF_SALT_ROUNDS) || 10;
-const hashedPassword = await bcrypt.hash(password, nbOfSaltRounds);
-
-await User.create({
-  avatar: "https://www.image-heberg.fr/files/1730816824593074177.png",
-  email: "nadiabakrim06@gmail.com",
-  lastname: "BAKRIM",
-  firstname: "Nadia",
-  password: hashedPassword,
-  role: "Admin",
-  is_active: true,
-});
-
-await User.create({
-  avatar: "https://www.image-heberg.fr/files/17308168724247201270.png",
-  email: "nadia_lina@hotmail.com",
-  lastname: "BAK",
-  firstname: "Nina",
-  password: hashedPassword,
-  role: "Employee",
-  is_active: true,
-
-});
