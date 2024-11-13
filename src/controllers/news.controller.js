@@ -1,5 +1,6 @@
 import { News } from "../models/news.model.js";
 import { User } from "../models/user.model.js";
+import '../models/associations.js';
 
 const newsController = {
   getAll: async (req, res) => {

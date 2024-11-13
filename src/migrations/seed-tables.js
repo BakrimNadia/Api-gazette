@@ -93,7 +93,7 @@ await News.create({
     picture: "https://www.image-heberg.fr/files/17314044972359921437.jpg",
     title: "Concernant la photocopieuse",
     subtitle: "Evitons les pannes inutiles",
-    author: await getUserIdByName("Rachel", "Dany"),
+    user_id: await getUserIdByName("Rachel", "Dany"),
     content: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Magnam provident aut, quidem voluptatibus inventore iusto officia! Saepe rerum officiis, deserunt beatae sunt delectus deleniti, facilis neque perspiciatis ratione vero laudantium quo velit nisi quam numquam quidem, amet in voluptates. Optio enim odio aliquam error vitae facilis fugiat ipsam. Iusto voluptatum odio harum veniam, minima inventore obcaecati cupiditate laborum alias est?Lorem ipsum dolor, sit amet consectetur adipisicing elit. Magnam provident aut, quidem voluptatibus inventore iusto officia! Saepe rerum officiis, deserunt beatae sunt delectus deleniti, facilis neque perspiciatis ratione vero laudantium quo velit nisi",
     date_publication: new Date("2024-05-21"),
   });
@@ -102,7 +102,7 @@ await News.create({
     picture: "https://www.image-heberg.fr/files/17310597221303080975.jpg",
     title: "Bonne nouvelle !",
     subtitle: "Notre CA est en croissance cette année",
-    author: await getUserIdByName("Keyna", "Aly"),
+    user_id: await getUserIdByName("Keyna", "Aly"),
     content: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Magnam provident aut, quidem voluptatibus inventore iusto officia! Saepe rerum officiis, deserunt beatae sunt delectus deleniti, facilis neque perspiciatis ratione vero laudantium quo velit nisi quam numquam quidem, amet in voluptates. Optio enim odio aliquam error vitae facilis fugiat ipsam. Iusto voluptatum odio harum veniam, minima inventore obcaecati cupiditate laborum alias est?Lorem ipsum dolor, sit amet consectetur adipisicing elit. Magnam provident aut, quidem voluptatibus inventore iusto officia! Saepe rerum officiis, deserunt beatae sunt delectus deleniti, facilis neque perspiciatis ratione vero laudantium quo velit nisi",
     date_publication: new Date("2024-05-21"),
   });

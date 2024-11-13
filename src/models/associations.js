@@ -6,32 +6,32 @@ import { sequelize } from '../database.js';
 
 User.hasMany(News, {
     as: 'news',
-    foreignKey: 'id_user',
+    foreignKey: 'user_id',
 });
   
 News.belongsTo(User, {
     as: 'newsAuthor',
-    foreignKey: 'id_user',
+    foreignKey: 'user_id',
 });
   
 User.hasMany(Article, {
     as: 'articles',
-    foreignKey: 'id_user',
+    foreignKey: 'user_id',
 });
   
 Article.belongsTo(User, {
     as: 'articleAuthor',
-    foreignKey: 'id_user',
+    foreignKey: 'user_id',
 });
   
 User.hasMany(Announcement, {
     as: 'announcements',
-    foreignKey: 'id_user',
+    foreignKey: 'user_id',
 });
   
 Announcement.belongsTo(User, {
     as: 'announcementAuthor',
-    foreignKey: 'id_user',
+    foreignKey: 'user_id',
 });
 
 export { User, News, Article, Announcement, sequelize };
