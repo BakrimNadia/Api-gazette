@@ -13,7 +13,7 @@ Announcement.init(
     type: DataTypes.STRING(255), 
     allowNull: false 
   }, 
-  subtitle: { 
+  price: { 
     type: DataTypes.STRING(255), 
     allowNull: true 
   }, 

@@ -155,7 +155,7 @@ await Article.create({
   await Announcement.create({
     picture: "https://www.image-heberg.fr/files/17301962331951446868.jpg",
     title: "Vend appareil photo",
-    subtitle: "Prix : 150€",
+    price: "150€",
     author: "Mila Rose",
     content: "très bon état, Lorem ipsum dolor, sit amet consectetur adipisicing elit. Magnam provident aut, quidem voluptatibus",
     date_publication: new Date("2024-05-21"),
@@ -164,7 +164,7 @@ await Article.create({
   await Announcement.create({
     picture: "https://www.image-heberg.fr/files/17301962521578318831.jpg",
     title: "Vend machine à laver neuve",
-    subtitle: "Prix : 200€",
+    price: "200€",
     author: "Amal Nina",
     content: "good, Lorem ipsum dolor, sit amet consectetur adipisicing elit. Magnam provident aut, quidem voluptatibus",
     date_publication: new Date("2024-05-21"),
@@ -173,7 +173,7 @@ await Article.create({
   await Announcement.create({
     picture: "https://www.image-heberg.fr/files/17301962953249915003.jpg",
     title: "Vend vélo de ville",
-    subtitle: "Prix : 100€",
+    price: "100€",
     author: "Léo Jean",
     content: "Vélo en très bon état, Lorem ipsum dolor, sit amet consectetur adipisicing elit. Magnam provident aut, quidem voluptatibus",
     date_publication: new Date("2024-05-21"),
@@ -182,7 +182,7 @@ await Article.create({
   await Announcement.create({
     picture: "https://www.image-heberg.fr/files/17301963082394906590.jpg",
     title: "Propose covoiturage",
-    subtitle: "Service",
+    price: "Service",
     author: "Ricardo Milo",
     content: "tous les soirs, Lorem ipsum dolor, sit amet consectetur adipisicing elit. Magnam provident aut, quidem voluptatibus",
     date_publication: new Date("2024-05-21"),
@@ -191,7 +191,7 @@ await Article.create({
   await Announcement.create({
     picture: "https://www.image-heberg.fr/files/17301963213984578237.jpg",
     title: "Echange de congés en novembre",
-    subtitle: "Service",
+    price: "Service",
     author: "Aly Keyna",
     content: "une semaine en novembre, Lorem ipsum dolor, sit amet consectetur adipisicing elit. Magnam provident aut, quidem voluptatibus",
     date_publication: new Date("2024-05-21"),
@@ -200,7 +200,7 @@ await Article.create({
   await Announcement.create({
     picture: "https://www.image-heberg.fr/files/17301963462030484220.jpg",
     title: "Vends sac de voyage",
-    subtitle:  "Prix : 50€",
+    price:  "50€",
     author: "Rachel Dany",
     content: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Magnam provident aut, quidem voluptatibus",
     date_publication: new Date("2024-05-21"),

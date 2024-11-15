@@ -25,14 +25,14 @@ const announcementController = {
     const {
       picture,
       title,
-      subtitle,
+      price,
       author,
       content,
       date_publication,
     } = req.body;
     if (
       !title ||
-      !subtitle ||
+      !price ||
       !author ||
       !content ||
       !date_publication
@@ -45,7 +45,7 @@ const announcementController = {
     const newAnnouncement = {
       picture,
       title,
-      subtitle,
+      price,
       author,
       content,
       date_publication: date_publication,
@@ -64,7 +64,7 @@ const announcementController = {
     const {
       picture,
       title,
-      subtitle,
+      price,
       author,
       content,
       date_publication,
@@ -79,7 +79,7 @@ const announcementController = {
     const updateAnnouncement = await Announcement.update({
       picture,
       title,
-      subtitle,
+      price,
       author,
       content,
       date_publication: date_publication,
