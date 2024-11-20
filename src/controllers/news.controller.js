@@ -51,12 +51,12 @@ const newsController = {
       picture,
       title,
       subtitle,
-      user_id, 
+      newsAuthor, 
       content,
       date_publication,
     } = req.body;
 
-    if (!title || !subtitle || !user_id || !content || !date_publication) {
+    if (!title || !subtitle || !newsAuthor || !content || !date_publication) {
       return res.status(400).json({ error: "Tous les champs sont obligatoires" });
     }
 
@@ -65,7 +65,7 @@ const newsController = {
         picture,
         title,
         subtitle,
-        user_id,
+        newsAuthor,
         content,
         date_publication,
       });
@@ -87,7 +87,7 @@ const newsController = {
       picture,
       title,
       subtitle,
-      user_id,
+      newsAuthor,
       content,
       date_publication,
     } = req.body;
@@ -103,7 +103,7 @@ const newsController = {
         picture,
         title,
         subtitle,
-        user_id,
+        newsAuthor,
         content,
         date_publication,
       });
