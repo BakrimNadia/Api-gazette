@@ -111,7 +111,7 @@ await Article.create({
     picture: "https://www.image-heberg.fr/files/1730196167929234465.jpg",
     title: "Le télétravail, pour ou contre ?",
     subtitle: "Etes-vous pour ou contre ?",
-    author: "Mila Rose",
+    user_id: await getUserIdByName("Nadia", "Bakrim"),
     content: "Le télétravail est ce une bonne pratique ? Lorem ipsum dolor, sit amet consectetur adipisicing elit. Magnam provident aut, quidem voluptatibus inventore iusto officia! Saepe rerum officiis, deserunt beatae sunt delectus deleniti, facilis neque perspiciatis ratione vero laudantium quo velit nisi quam numquam quidem, amet in voluptates. Optio enim odio aliquam error vitae facilis fugiat ipsam. Iusto voluptatum odio harum veniam, minima inventore obcaecati cupiditate laborum alias est?Lorem ipsum dolor, sit amet consectetur adipisicing elit. Magnam provident aut, quidem voluptatibus inventore iusto officia! Saepe rerum officiis, deserunt beatae sunt delectus deleniti, facilis neque perspiciatis ratione vero laudantium quo velit nisi",
     date_publication: new Date("2024-05-21"),
   });
@@ -120,7 +120,7 @@ await Article.create({
     picture: "https://www.image-heberg.fr/files/17301960894063031807.jpg",
     title: "Le Healthy food",
     subtitle: "Comment allier plaisir et santé ?",
-    author: "Rachel Dany",
+    user_id: await getUserIdByName("Rachel", "Dany"),
     content: "Comment allier plaisir et santé ? Lorem ipsum dolor, sit amet consectetur adipisicing elit. Magnam provident aut, quidem voluptatibus inventore iusto officia! Saepe rerum officiis, deserunt beatae sunt delectus deleniti, facilis neque perspiciatis ratione vero laudantium quo velit nisi quam numquam quidem, amet in voluptates. Optio enim odio aliquam error vitae facilis fugiat ipsam. Iusto voluptatum odio harum veniam, minima inventore obcaecati cupiditate laborum alias est?Lorem ipsum dolor, sit amet consectetur adipisicing elit. Magnam provident aut, quidem voluptatibus inventore iusto officia! Saepe rerum officiis, deserunt beatae sunt delectus deleniti, facilis neque perspiciatis ratione vero laudantium quo velit nisi",
     date_publication: new Date("2024-05-21"),
   });
@@ -129,7 +129,7 @@ await Article.create({
     picture: "https://www.image-heberg.fr/files/17301961911725896866.jpg",
     title: "Prendre soin de nos animaux",
     subtitle: "Avoir un animal est-ce compliqué ?",
-    author: "Aly Keyna",
+    user_id: await getUserByname("Milo", "Ricardo"),
     content: "Concilier travail et temps pour nos amis à 4 pattes, Lorem ipsum dolor, sit amet consectetur adipisicing elit. Magnam provident aut, quidem voluptatibus inventore iusto officia! Saepe rerum officiis, deserunt beatae sunt delectus deleniti, facilis neque perspiciatis ratione vero laudantium quo velit nisi quam numquam quidem, amet in voluptates. Optio enim odio aliquam error vitae facilis fugiat ipsam. Iusto voluptatum odio harum veniam, minima inventore obcaecati cupiditate laborum alias est?Lorem ipsum dolor, sit amet consectetur adipisicing elit. Magnam provident aut, quidem voluptatibus inventore iusto officia! Saepe rerum officiis, deserunt beatae sunt delectus deleniti, facilis neque perspiciatis ratione vero laudantium quo velit nisi",
     date_publication: new Date("2024-05-21"),
   });
@@ -138,7 +138,7 @@ await Article.create({
     picture: "https://www.image-heberg.fr/files/17301962054260666244.jpg",
     title: "Voiture électrique, why not ?",
     subtitle: "Les avantages et les inconvénients",
-    author: "Amal Nina",
+    user_id: await getUserIdByName("Keyna", "Aly"),
     content: "Les avantages et les inconvénients, Lorem ipsum dolor, sit amet consectetur adipisicing elit. Magnam provident aut, quidem voluptatibus inventore iusto officia! Saepe rerum officiis, deserunt beatae sunt delectus deleniti, facilis neque perspiciatis ratione vero laudantium quo velit nisi quam numquam quidem, amet in voluptates. Optio enim odio aliquam error vitae facilis fugiat ipsam. Iusto voluptatum odio harum veniam, minima inventore obcaecati cupiditate laborum alias est?Lorem ipsum dolor, sit amet consectetur adipisicing elit. Magnam provident aut, quidem voluptatibus inventore iusto officia! Saepe rerum officiis, deserunt beatae sunt delectus deleniti, facilis neque perspiciatis ratione vero laudantium quo velit nisi",
     date_publication: new Date("2024-05-21"),
   });
@@ -147,7 +147,7 @@ await Article.create({
     picture: "https://www.image-heberg.fr/files/17301962193231270805.jpg",
     title: "architecture moderne",
     subtitle: "Les grandes villes se modernisent",
-    author: "Léo Jean",
+    user_id: await getUserIdByName("Léo", "Jean"),
     content: "Les avantages et les inconvénients, Lorem ipsum dolor, sit amet consectetur adipisicing elit. Magnam provident aut, quidem voluptatibus inventore iusto officia! Saepe rerum officiis, deserunt beatae sunt delectus deleniti, facilis neque perspiciatis ratione vero laudantium quo velit nisi quam numquam quidem, amet in voluptates. Optio enim odio aliquam error vitae facilis fugiat ipsam. Iusto voluptatum odio harum veniam, minima inventore obcaecati cupiditate laborum alias est?Lorem ipsum dolor, sit amet consectetur adipisicing elit. Magnam provident aut, quidem voluptatibus inventore iusto officia! Saepe rerum officiis, deserunt beatae sunt delectus deleniti, facilis neque perspiciatis ratione vero laudantium quo velit nisi",
     date_publication: new Date("2024-05-21"),
   });
