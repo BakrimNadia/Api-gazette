@@ -25,7 +25,7 @@ const hashedPassword = await bcrypt.hash(password, nbOfSaltRounds);
     lastname: "Dany",
     firstname: "Rachel",
     password: hashedPassword,
-    role: "Employee",
+    role: "Rédacteur",
     is_active: true,
   }),
   await User.create({
@@ -34,7 +34,7 @@ const hashedPassword = await bcrypt.hash(password, nbOfSaltRounds);
     lastname: "Jean",
     firstname: "Léo",
     password: hashedPassword,
-    role: "Employee",
+    role: "Rédacteur",
     is_active: true,
   }),
   await User.create({
@@ -43,7 +43,7 @@ const hashedPassword = await bcrypt.hash(password, nbOfSaltRounds);
     lastname: "Aly",
     firstname: "Keyna",
     password: hashedPassword,
-    role: "Employee",
+    role: "Rédacteur",
     is_active: true,
   }),
   await User.create({
@@ -52,7 +52,7 @@ const hashedPassword = await bcrypt.hash(password, nbOfSaltRounds);
     lastname: "Ricardo",
     firstname: "Milo",
     password: hashedPassword,
-    role: "Employee",
+    role: "Rédacteur",
     is_active: true,
   })
 
