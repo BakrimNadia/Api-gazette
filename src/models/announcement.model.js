@@ -29,7 +29,11 @@ Announcement.init(
     type: DataTypes.DATE,
     defaultValue: DataTypes.NOW,
     allowNull: false,
-  } 
+  },
+  category: { 
+    type: DataTypes.STRING(255), 
+    allowNull: false 
+  }, 
 },
 {
     sequelize,

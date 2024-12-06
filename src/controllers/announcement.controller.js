@@ -29,13 +29,15 @@ const announcementController = {
       author,
       content,
       date_publication,
+      category,
     } = req.body;
     if (
       !title ||
       !price ||
       !author ||
       !content ||
-      !date_publication
+      !date_publication ||
+      !category
     ) {
       console.log("Tous les champs sont obligatoire");
       return res
@@ -49,6 +51,7 @@ const announcementController = {
       author,
       content,
       date_publication: date_publication,
+      category,
     };
     await Announcement.create(newAnnouncement);
     res.status(201).json(newAnnouncement);
@@ -68,6 +71,7 @@ const announcementController = {
       author,
       content,
       date_publication,
+      category,
     } = req.body;
 
     const announcement = await Announcement.findByPk(announcementId);
@@ -83,6 +87,7 @@ const announcementController = {
       author,
       content,
       date_publication: date_publication,
+      category,
     });
 
     res.json(updateAnnouncement);
