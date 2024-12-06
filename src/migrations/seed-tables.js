@@ -159,6 +159,7 @@ await Article.create({
     author: "Mila Rose",
     content: "très bon état, Lorem ipsum dolor, sit amet consectetur adipisicing elit. Magnam provident aut, quidem voluptatibus",
     date_publication: new Date("2024-05-21"),
+    category:"Eléctronique",
   });
 
   await Announcement.create({
@@ -168,6 +169,7 @@ await Article.create({
     author: "Amal Nina",
     content: "good, Lorem ipsum dolor, sit amet consectetur adipisicing elit. Magnam provident aut, quidem voluptatibus",
     date_publication: new Date("2024-05-21"),
+    category:"Eléctroménager",
   });
 
   await Announcement.create({
@@ -177,6 +179,7 @@ await Article.create({
     author: "Léo Jean",
     content: "Vélo en très bon état, Lorem ipsum dolor, sit amet consectetur adipisicing elit. Magnam provident aut, quidem voluptatibus",
     date_publication: new Date("2024-05-21"),
+    category:"Sport-loisirs",
   });
 
   await Announcement.create({
@@ -186,6 +189,7 @@ await Article.create({
     author: "Ricardo Milo",
     content: "tous les soirs, Lorem ipsum dolor, sit amet consectetur adipisicing elit. Magnam provident aut, quidem voluptatibus",
     date_publication: new Date("2024-05-21"),
+    category:"Service",
   });
 
   await Announcement.create({
@@ -195,6 +199,7 @@ await Article.create({
     author: "Aly Keyna",
     content: "une semaine en novembre, Lorem ipsum dolor, sit amet consectetur adipisicing elit. Magnam provident aut, quidem voluptatibus",
     date_publication: new Date("2024-05-21"),
+    category:"Service",
   });
 
   await Announcement.create({
@@ -204,4 +209,5 @@ await Article.create({
     author: "Rachel Dany",
     content: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Magnam provident aut, quidem voluptatibus",
     date_publication: new Date("2024-05-21"),
+    category:"Accessoires-bagagerie",
   });
