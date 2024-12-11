@@ -10,7 +10,7 @@ const hashedPassword = await bcrypt.hash(password, nbOfSaltRounds);
 
 // Création des utilisateurs
 
- await User.create({
+ const nadia = await User.create({
     avatar: "https://www.image-heberg.fr/files/1730816824593074177.png",
     email: "nadiabakrim06@gmail.com",
     lastname: "Bakrim",
@@ -18,8 +18,9 @@ const hashedPassword = await bcrypt.hash(password, nbOfSaltRounds);
     password: hashedPassword,
     role: "Admin",
     is_active: true,
-  }),
-  await User.create({
+  });
+
+  const rachel = await User.create({
     avatar: "https://www.image-heberg.fr/files/17308168724247201270.png",
     email: "nadia_lina@hotmail.com",
     lastname: "Dany",
@@ -27,8 +28,8 @@ const hashedPassword = await bcrypt.hash(password, nbOfSaltRounds);
     password: hashedPassword,
     role: "Rédacteur",
     is_active: true,
-  }),
-  await User.create({
+  });
+  const leo = await User.create({
     avatar: "https://www.image-heberg.fr/files/17314323393907223114.png",
     email: "jean-leo@hotmail.com",
     lastname: "Jean",
@@ -36,8 +37,8 @@ const hashedPassword = await bcrypt.hash(password, nbOfSaltRounds);
     password: hashedPassword,
     role: "Rédacteur",
     is_active: true,
-  }),
-  await User.create({
+  });
+  const keyna = await User.create({
     avatar: "https://www.image-heberg.fr/files/17314323393907223114.png",
     email: "aly-keyna@hotmail.com",
     lastname: "Aly",
@@ -45,8 +46,8 @@ const hashedPassword = await bcrypt.hash(password, nbOfSaltRounds);
     password: hashedPassword,
     role: "Rédacteur",
     is_active: true,
-  }),
-  await User.create({
+  });
+  const milo = await User.create({
     avatar: "https://www.image-heberg.fr/files/17314323393907223114.png",
     email: "ricardo-milo@hotmail.com",
     lastname: "Ricardo",
@@ -54,19 +55,19 @@ const hashedPassword = await bcrypt.hash(password, nbOfSaltRounds);
     password: hashedPassword,
     role: "Rédacteur",
     is_active: true,
-  })
+  });
 
 
-async function getUserIdByName(firstname, lastname) {
+/* async function getUserIdByName(firstname, lastname) {
   const user = await User.findOne({ where: { firstname, lastname } });
   return user ? user.id : null;
-}
+} */
 
 await News.create({
   picture: "https://www.image-heberg.fr/files/17314042252607362670.jpg",
   title: "Nouvelle salle de pause",
   subtitle: "Ouverture de la nouvelle salle de pause",
-  user_id: await getUserIdByName("Léo", "Jean"),
+  user_id: leo.id,
   content: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Magnam provident aut, quidem voluptatibus inventore iusto officia! Saepe rerum officiis, deserunt beatae sunt delectus deleniti, facilis neque perspiciatis ratione vero laudantium quo velit nisi quam numquam quidem, amet in voluptates. Optio enim odio aliquam error vitae facilis fugiat ipsam. Iusto voluptatum odio harum veniam, minima inventore obcaecati cupiditate laborum alias est?Lorem ipsum dolor, sit amet consectetur adipisicing elit. Magnam provident aut, quidem voluptatibus inventore iusto officia! Saepe rerum officiis, deserunt beatae sunt delectus deleniti, facilis neque perspiciatis ratione vero laudantium quo velit nisi ",
   date_publication: new Date("2024-05-21"),
 });
@@ -75,7 +76,7 @@ await News.create({
     picture: "https://www.image-heberg.fr/files/17310595364089377106.jpg",
     title: "Salle d'entretien rénovée",
     subtitle: "Agrandissement et rafraîchissement",
-    user_id: await getUserIdByName("Nadia", "Bakrim"),
+    user_id: nadia.id,
     content: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Magnam provident aut, quidem voluptatibus inventore iusto officia! Saepe rerum officiis, deserunt beatae sunt delectus deleniti, facilis neque perspiciatis ratione vero laudantium quo velit nisi quam numquam quidem, amet in voluptates. Optio enim odio aliquam error vitae facilis fugiat ipsam. Iusto voluptatum odio harum veniam, minima inventore obcaecati cupiditate laborum alias est?Lorem ipsum dolor, sit amet consectetur adipisicing elit. Magnam provident aut, quidem voluptatibus inventore iusto officia! Saepe rerum officiis, deserunt beatae sunt delectus deleniti, facilis neque perspiciatis ratione vero laudantium quo velit nisi",
     date_publication: new Date("2024-05-21"),
   });
@@ -84,7 +85,7 @@ await News.create({
     picture: "https://www.image-heberg.fr/files/17310592731520636150.jpg",
     title: "Réunion le vendredi 15 octobre",
     subtitle: "Objet : nouveau fournisseur",
-    user_id: await getUserIdByName("Milo", "Ricardo"),
+    user_id: milo.id,
     content: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Magnam provident aut, quidem voluptatibus inventore iusto officia! Saepe rerum officiis, deserunt beatae sunt delectus deleniti, facilis neque perspiciatis ratione vero laudantium quo velit nisi quam numquam quidem, amet in voluptates. Optio enim odio aliquam error vitae facilis fugiat ipsam. Iusto voluptatum odio harum veniam, minima inventore obcaecati cupiditate laborum alias est?Lorem ipsum dolor, sit amet consectetur adipisicing elit. Magnam provident aut, quidem voluptatibus inventore iusto officia! Saepe rerum officiis, deserunt beatae sunt delectus deleniti, facilis neque perspiciatis ratione vero laudantium quo velit nisi",
     date_publication: new Date("2024-05-21"),
   });
@@ -93,7 +94,7 @@ await News.create({
     picture: "https://www.image-heberg.fr/files/17314044972359921437.jpg",
     title: "Concernant la photocopieuse",
     subtitle: "Evitons les pannes inutiles",
-    user_id: await getUserIdByName("Rachel", "Dany"),
+    user_id: rachel.id,
     content: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Magnam provident aut, quidem voluptatibus inventore iusto officia! Saepe rerum officiis, deserunt beatae sunt delectus deleniti, facilis neque perspiciatis ratione vero laudantium quo velit nisi quam numquam quidem, amet in voluptates. Optio enim odio aliquam error vitae facilis fugiat ipsam. Iusto voluptatum odio harum veniam, minima inventore obcaecati cupiditate laborum alias est?Lorem ipsum dolor, sit amet consectetur adipisicing elit. Magnam provident aut, quidem voluptatibus inventore iusto officia! Saepe rerum officiis, deserunt beatae sunt delectus deleniti, facilis neque perspiciatis ratione vero laudantium quo velit nisi",
     date_publication: new Date("2024-05-21"),
   });
@@ -102,7 +103,7 @@ await News.create({
     picture: "https://www.image-heberg.fr/files/17310597221303080975.jpg",
     title: "Bonne nouvelle !",
     subtitle: "Notre CA est en croissance cette année",
-    user_id: await getUserIdByName("Keyna", "Aly"),
+    user_id: keyna.id,
     content: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Magnam provident aut, quidem voluptatibus inventore iusto officia! Saepe rerum officiis, deserunt beatae sunt delectus deleniti, facilis neque perspiciatis ratione vero laudantium quo velit nisi quam numquam quidem, amet in voluptates. Optio enim odio aliquam error vitae facilis fugiat ipsam. Iusto voluptatum odio harum veniam, minima inventore obcaecati cupiditate laborum alias est?Lorem ipsum dolor, sit amet consectetur adipisicing elit. Magnam provident aut, quidem voluptatibus inventore iusto officia! Saepe rerum officiis, deserunt beatae sunt delectus deleniti, facilis neque perspiciatis ratione vero laudantium quo velit nisi",
     date_publication: new Date("2024-05-21"),
   });
@@ -111,7 +112,7 @@ await Article.create({
     picture: "https://www.image-heberg.fr/files/1730196167929234465.jpg",
     title: "Le télétravail, pour ou contre ?",
     subtitle: "Etes-vous pour ou contre ?",
-    user_id: await getUserIdByName("Nadia", "Bakrim"),
+    user_id: nadia.id,
     content: "Le télétravail est ce une bonne pratique ? Lorem ipsum dolor, sit amet consectetur adipisicing elit. Magnam provident aut, quidem voluptatibus inventore iusto officia! Saepe rerum officiis, deserunt beatae sunt delectus deleniti, facilis neque perspiciatis ratione vero laudantium quo velit nisi quam numquam quidem, amet in voluptates. Optio enim odio aliquam error vitae facilis fugiat ipsam. Iusto voluptatum odio harum veniam, minima inventore obcaecati cupiditate laborum alias est?Lorem ipsum dolor, sit amet consectetur adipisicing elit. Magnam provident aut, quidem voluptatibus inventore iusto officia! Saepe rerum officiis, deserunt beatae sunt delectus deleniti, facilis neque perspiciatis ratione vero laudantium quo velit nisi",
     date_publication: new Date("2024-05-21"),
   });
@@ -120,7 +121,7 @@ await Article.create({
     picture: "https://www.image-heberg.fr/files/17301960894063031807.jpg",
     title: "Le Healthy food",
     subtitle: "Comment allier plaisir et santé ?",
-    user_id: await getUserIdByName("Rachel", "Dany"),
+    user_id: rachel.id,
     content: "Comment allier plaisir et santé ? Lorem ipsum dolor, sit amet consectetur adipisicing elit. Magnam provident aut, quidem voluptatibus inventore iusto officia! Saepe rerum officiis, deserunt beatae sunt delectus deleniti, facilis neque perspiciatis ratione vero laudantium quo velit nisi quam numquam quidem, amet in voluptates. Optio enim odio aliquam error vitae facilis fugiat ipsam. Iusto voluptatum odio harum veniam, minima inventore obcaecati cupiditate laborum alias est?Lorem ipsum dolor, sit amet consectetur adipisicing elit. Magnam provident aut, quidem voluptatibus inventore iusto officia! Saepe rerum officiis, deserunt beatae sunt delectus deleniti, facilis neque perspiciatis ratione vero laudantium quo velit nisi",
     date_publication: new Date("2024-05-21"),
   });
@@ -129,7 +130,7 @@ await Article.create({
     picture: "https://www.image-heberg.fr/files/17301961911725896866.jpg",
     title: "Prendre soin de nos animaux",
     subtitle: "Avoir un animal est-ce compliqué ?",
-    user_id: await getUserIdByName("Milo", "Ricardo"),
+    user_id: milo.id,
     content: "Concilier travail et temps pour nos amis à 4 pattes, Lorem ipsum dolor, sit amet consectetur adipisicing elit. Magnam provident aut, quidem voluptatibus inventore iusto officia! Saepe rerum officiis, deserunt beatae sunt delectus deleniti, facilis neque perspiciatis ratione vero laudantium quo velit nisi quam numquam quidem, amet in voluptates. Optio enim odio aliquam error vitae facilis fugiat ipsam. Iusto voluptatum odio harum veniam, minima inventore obcaecati cupiditate laborum alias est?Lorem ipsum dolor, sit amet consectetur adipisicing elit. Magnam provident aut, quidem voluptatibus inventore iusto officia! Saepe rerum officiis, deserunt beatae sunt delectus deleniti, facilis neque perspiciatis ratione vero laudantium quo velit nisi",
     date_publication: new Date("2024-05-21"),
   });
@@ -138,7 +139,7 @@ await Article.create({
     picture: "https://www.image-heberg.fr/files/17301962054260666244.jpg",
     title: "Voiture électrique, why not ?",
     subtitle: "Les avantages et les inconvénients",
-    user_id: await getUserIdByName("Keyna", "Aly"),
+    user_id: keyna.id,
     content: "Les avantages et les inconvénients, Lorem ipsum dolor, sit amet consectetur adipisicing elit. Magnam provident aut, quidem voluptatibus inventore iusto officia! Saepe rerum officiis, deserunt beatae sunt delectus deleniti, facilis neque perspiciatis ratione vero laudantium quo velit nisi quam numquam quidem, amet in voluptates. Optio enim odio aliquam error vitae facilis fugiat ipsam. Iusto voluptatum odio harum veniam, minima inventore obcaecati cupiditate laborum alias est?Lorem ipsum dolor, sit amet consectetur adipisicing elit. Magnam provident aut, quidem voluptatibus inventore iusto officia! Saepe rerum officiis, deserunt beatae sunt delectus deleniti, facilis neque perspiciatis ratione vero laudantium quo velit nisi",
     date_publication: new Date("2024-05-21"),
   });
@@ -147,7 +148,7 @@ await Article.create({
     picture: "https://www.image-heberg.fr/files/17301962193231270805.jpg",
     title: "architecture moderne",
     subtitle: "Les grandes villes se modernisent",
-    user_id: await getUserIdByName("Léo", "Jean"),
+    user_id: leo.id,
     content: "Les avantages et les inconvénients, Lorem ipsum dolor, sit amet consectetur adipisicing elit. Magnam provident aut, quidem voluptatibus inventore iusto officia! Saepe rerum officiis, deserunt beatae sunt delectus deleniti, facilis neque perspiciatis ratione vero laudantium quo velit nisi quam numquam quidem, amet in voluptates. Optio enim odio aliquam error vitae facilis fugiat ipsam. Iusto voluptatum odio harum veniam, minima inventore obcaecati cupiditate laborum alias est?Lorem ipsum dolor, sit amet consectetur adipisicing elit. Magnam provident aut, quidem voluptatibus inventore iusto officia! Saepe rerum officiis, deserunt beatae sunt delectus deleniti, facilis neque perspiciatis ratione vero laudantium quo velit nisi",
     date_publication: new Date("2024-05-21"),
   });
