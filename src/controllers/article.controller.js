@@ -51,14 +51,14 @@ const articleController = {
       picture,
       title,
       subtitle,
-      author,
+      user_id,
       content,
       date_publication,
     } = req.body;
     if (
       !title ||
       !subtitle ||
-      !author ||
+      !user_id ||
       !content ||
       !date_publication
     ) {
@@ -73,7 +73,7 @@ const articleController = {
       picture,
       title,
       subtitle,
-      author,
+      user_id,
       content,
       date_publication,
     });
@@ -95,7 +95,7 @@ const articleController = {
       picture,
       title,
       subtitle,
-      author,
+      user_id,
       content,
       date_publication,
     } = req.body;
@@ -111,7 +111,7 @@ const articleController = {
       picture,
       title,
       subtitle,
-      author,
+      user_id,
       content,
       date_publication,
     });
