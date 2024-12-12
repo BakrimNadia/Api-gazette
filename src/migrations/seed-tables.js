@@ -1,6 +1,6 @@
 import bcrypt from "bcrypt";
 import "dotenv/config";
-import { News, Article, Announcement, User } from "../models/associations.js";
+import { News, Article, Announcement, User, Category } from "../models/associations.js";
 
 console.log("Création des données...");
 
@@ -57,11 +57,6 @@ const hashedPassword = await bcrypt.hash(password, nbOfSaltRounds);
     is_active: true,
   });
 
-
-/* async function getUserIdByName(firstname, lastname) {
-  const user = await User.findOne({ where: { firstname, lastname } });
-  return user ? user.id : null;
-} */
 
 await News.create({
   picture: "https://www.image-heberg.fr/files/17314042252607362670.jpg",
@@ -153,6 +148,51 @@ await Article.create({
     date_publication: new Date("2024-05-21"),
   });
 
+const Ameublement = await Category.create({
+    name: "Ameublement",
+  });
+
+  const Eléctronique = await Category.create({
+    name: "Eléctronique",
+  });
+
+  const Eléctroménager = await Category.create({
+    name: "Eléctroménager",
+  });
+
+  const Décoration = await Category.create({
+    name: "Décoration",
+  });
+
+  const Sport_loisirs = await Category.create({
+    name: "Sport-loisirs",
+  });
+
+  const Vehicules = await Category.create({
+    name: "Vehicules",
+  });
+
+  const Service = await Category.create({
+    name: "Service",
+  });
+
+  const Accessoires_bagagerie = await Category.create({
+    name: "Accessoires-bagagerie",
+  });
+
+  const Vêtements = await Category.create({
+    name: "Vêtements",
+  });
+
+  const Chaussures = await Category.create({
+    name: "Chaussures",
+  });
+
+  const Autres = await Category.create({
+    name: "Autres",
+  });
+
+
   await Announcement.create({
     picture: "https://www.image-heberg.fr/files/17301962331951446868.jpg",
     title: "Vend appareil photo",
@@ -160,7 +200,7 @@ await Article.create({
     author: "Mila Rose",
     content: "très bon état, Lorem ipsum dolor, sit amet consectetur adipisicing elit. Magnam provident aut, quidem voluptatibus",
     date_publication: new Date("2024-05-21"),
-    category:"Eléctronique",
+    category_id:Eléctronique.id,
   });
 
   await Announcement.create({
@@ -170,7 +210,7 @@ await Article.create({
     author: "Amal Nina",
     content: "good, Lorem ipsum dolor, sit amet consectetur adipisicing elit. Magnam provident aut, quidem voluptatibus",
     date_publication: new Date("2024-05-21"),
-    category:"Eléctroménager",
+    category_id:Eléctroménager.id,
   });
 
   await Announcement.create({
@@ -180,7 +220,7 @@ await Article.create({
     author: "Léo Jean",
     content: "Vélo en très bon état, Lorem ipsum dolor, sit amet consectetur adipisicing elit. Magnam provident aut, quidem voluptatibus",
     date_publication: new Date("2024-05-21"),
-    category:"Sport-loisirs",
+    category_id:Sport_loisirs.id,
   });
 
   await Announcement.create({
@@ -190,7 +230,7 @@ await Article.create({
     author: "Ricardo Milo",
     content: "tous les soirs, Lorem ipsum dolor, sit amet consectetur adipisicing elit. Magnam provident aut, quidem voluptatibus",
     date_publication: new Date("2024-05-21"),
-    category:"Service",
+    category_id:Service.id,
   });
 
   await Announcement.create({
@@ -200,7 +240,7 @@ await Article.create({
     author: "Aly Keyna",
     content: "une semaine en novembre, Lorem ipsum dolor, sit amet consectetur adipisicing elit. Magnam provident aut, quidem voluptatibus",
     date_publication: new Date("2024-05-21"),
-    category:"Service",
+    category_id:Service.id,
   });
 
   await Announcement.create({
@@ -210,5 +250,5 @@ await Article.create({
     author: "Rachel Dany",
     content: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Magnam provident aut, quidem voluptatibus",
     date_publication: new Date("2024-05-21"),
-    category:"Accessoires-bagagerie",
+    category_id:Accessoires_bagagerie.id,
   });

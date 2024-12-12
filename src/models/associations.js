@@ -2,6 +2,7 @@ import { User } from './user.model.js';
 import { News } from './news.model.js';
 import { Article } from './article.model.js';
 import { Announcement } from './announcement.model.js';
+import { Category } from './category.model.js';
 import { sequelize } from '../database.js';
 
 User.hasMany(News, {
@@ -34,4 +35,14 @@ Announcement.belongsTo(User, {
     foreignKey: 'user_id',
 });
 
-export { User, News, Article, Announcement, sequelize };
+Category.hasMany(Announcement, {
+    as: 'announcementCategory',
+    foreignKey: 'category_id',
+  });
+  
+Announcement.belongsTo(Category, {
+    as: 'category',
+    foreignKey: 'category_id',
+  });
+
+export { User, News, Article, Announcement, Category, sequelize };
