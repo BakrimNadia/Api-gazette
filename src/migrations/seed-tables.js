@@ -148,7 +148,7 @@ await Article.create({
     date_publication: new Date("2024-05-21"),
   });
 
-const Ameublement = await Category.create({
+await Category.create({
     name: "Ameublement",
   });
 
@@ -160,7 +160,7 @@ const Ameublement = await Category.create({
     name: "Eléctroménager",
   });
 
-  const Décoration = await Category.create({
+ await Category.create({
     name: "Décoration",
   });
 
@@ -168,7 +168,7 @@ const Ameublement = await Category.create({
     name: "Sport-loisirs",
   });
 
-  const Vehicules = await Category.create({
+ await Category.create({
     name: "Vehicules",
   });
 
@@ -180,15 +180,15 @@ const Ameublement = await Category.create({
     name: "Accessoires-bagagerie",
   });
 
-  const Vêtements = await Category.create({
+  await Category.create({
     name: "Vêtements",
   });
 
-  const Chaussures = await Category.create({
+  await Category.create({
     name: "Chaussures",
   });
 
-  const Autres = await Category.create({
+  await Category.create({
     name: "Autres",
   });
 
@@ -235,7 +235,7 @@ const Ameublement = await Category.create({
 
   await Announcement.create({
     picture: "https://www.image-heberg.fr/files/17301963213984578237.jpg",
-    title: "Echange de congés en novembre",
+    title: "Echange de congés aout",
     price: "Service",
     author: "Aly Keyna",
     content: "une semaine en novembre, Lorem ipsum dolor, sit amet consectetur adipisicing elit. Magnam provident aut, quidem voluptatibus",
