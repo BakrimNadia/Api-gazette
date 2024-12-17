@@ -23,17 +23,7 @@ User.hasMany(Article, {
 Article.belongsTo(User, {
     as: 'articleAuthor',
     foreignKey: 'user_id',
-});
-  
-User.hasMany(Announcement, {
-    as: 'announcements',
-    foreignKey: 'user_id',
-});
-  
-Announcement.belongsTo(User, {
-    as: 'announcementAuthor',
-    foreignKey: 'user_id',
-});
+}); 
 
 Category.hasMany(Announcement, {
     as: 'announcementCategory',
