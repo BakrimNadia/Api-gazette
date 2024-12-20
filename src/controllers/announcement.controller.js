@@ -10,7 +10,7 @@ const announcementController = {
         include: [{
           model: Category,
           as: 'category',
-          attributes: ['name'], 
+          attributes: ['id','name'], 
         }]
       }
     );
@@ -32,7 +32,7 @@ const announcementController = {
       include: [{
         model: Category,
         as: 'category',
-        attributes: ['name'],
+        attributes: ['id','name'],
       }]
     }
     );

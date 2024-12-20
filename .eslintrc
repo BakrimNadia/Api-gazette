@@ -6,7 +6,7 @@
     },
     "parserOptions": {
       "ecmaVersion": 2022,
-      "sourceType": "module" // Necessaire pour ESM
+      "sourceType": "module"
     },
     "extends": "eslint:recommended",
     "rules": {
