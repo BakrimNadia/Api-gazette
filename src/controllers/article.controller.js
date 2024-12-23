@@ -107,14 +107,16 @@ const articleController = {
       return res.status(404).json({ error: "Article inconnu" });
     }
 
-    await article.update({
+    const updateArticle = await article.update({
       picture,
       title,
       subtitle,
       user_id,
       content,
       date_publication,
-    });
+    }
+    , {where: { id: articleId }}
+  );
 
     res.json(updateArticle);
     } catch (error) {

@@ -106,7 +106,9 @@ const newsController = {
         user_id,
         content,
         date_publication,
-      });
+      }
+      , { where: { id: newsId } }
+    );
 
       res.json(news);
     } catch (error) {

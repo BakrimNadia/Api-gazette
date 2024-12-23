@@ -113,15 +113,19 @@ const announcementController = {
       return res.status(404).json({ error: "annonce inconnu" });
     }
 
-    const updateAnnouncement = await Announcement.update({
+    const updateAnnouncement = await announcement.update({
       picture,
       title,
       price,
       author,
       content,
-      date_publication: date_publication,
+      date_publication,
       category_id,
-    });
+    }
+    , {
+      where: { id: announcementId },
+    }
+  );
 
     res.json(updateAnnouncement);
   } catch (error) {
@@ -137,7 +141,7 @@ const announcementController = {
       return res.status(404).json({ error: "id inconnu" });
     }
     try {
-    const announcement = await Announcement.findByPk(newsId);
+    const announcement = await Announcement.findByPk(announcementId);
 
     if (!announcement) {
       return res.status(404).json({ error: "Annonce inconnue" });
