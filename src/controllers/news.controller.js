@@ -1,6 +1,7 @@
 import { News } from "../models/news.model.js";
 import { User } from "../models/user.model.js";
 import '../models/associations.js';
+import sanitizeHtml from 'sanitize-html';
 
 const newsController = {
   getAll: async (req, res) => {
@@ -46,7 +47,7 @@ const newsController = {
     }
   },
 
-  insert: async (req, res) => {
+  insert: [sanitizeHtml, async (req, res) => {
     const {
       picture,
       title,
@@ -74,9 +75,9 @@ const newsController = {
       console.error("Erreur lors de l'insertion de la note d'information :", error);
       res.status(500).json({ error: "Erreur serveur" });
     }
-  },
+  }],
 
-  update: async (req, res) => {
+  update: [sanitizeHtml, async (req, res) => {
     const newsId = parseInt(req.params.id);
 
     if (!newsId) {
@@ -106,16 +107,14 @@ const newsController = {
         user_id,
         content,
         date_publication,
-      }
-      , { where: { id: newsId } }
-    );
+      });
 
       res.json(news);
     } catch (error) {
       console.error("Erreur lors de la mise à jour de la note d'information :", error);
       res.status(500).json({ error: "Erreur serveur" });
     }
-  },
+  }],
 
   delete: async (req, res) => {
     const newsId = parseInt(req.params.id);

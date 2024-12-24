@@ -1,4 +1,5 @@
 import { User } from "../models/user.model.js";
+import sanitizeHtml from 'sanitize-html';
 
 const userController = {
   getAll: async (req, res) => {
@@ -32,7 +33,7 @@ const userController = {
     }
   },
 
-  update: async (req, res) => {
+  update: [ sanitizeHtml, async (req, res) => {
     const userId = parseInt(req.params.id);
 
     if (!userId) {
@@ -77,9 +78,9 @@ const userController = {
       console.error("Erreur lors de la mise à jour de l'utilisateur :", error);
       res.status(500).json({ error: "Erreur serveur" });
     }
-  },
+  }],
 
-  softDelete: async (req, res) => {
+  softDelete: [ sanitizeHtml, async (req, res) => {
     const email = req.body.email;
 
     if (!email) {
@@ -101,7 +102,7 @@ const userController = {
       console.error("Erreur lors de la désactivation de l'utilisateur :", error);
       res.status(500).json({ error: "Erreur serveur" });
     }
-  },
+  }],
 };
 
 export default userController;

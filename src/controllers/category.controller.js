@@ -1,5 +1,6 @@
 import { Category } from "../models/category.model.js";
 import "../models/associations.js";
+import sanitizeHtml from "sanitize-html";
 
 const categoryController = {
     getAll : async (req, res) => {
@@ -21,7 +22,7 @@ const categoryController = {
         res.json(category);
     },
 
-    insert : async (req, res) => {
+    insert :  [sanitizeHtml, async (req, res) => {
         const { name } = req.body;
         if (!name) {
             console.log("Tous les champs sont obligatoire");
@@ -32,9 +33,9 @@ const categoryController = {
         };
         await Category.create(newCategory);
         res.status(201).json(newCategory);
-    },
+    }],
 
-    update : async (req, res) => {
+    update :  [sanitizeHtml, async (req, res) => {
         const categoryId = parseInt(req.params.id);
         const { name } = req.body;
         if (!categoryId) {
@@ -50,7 +51,7 @@ const categoryController = {
         category.name = name;
         await category.save();
         res.json(category);
-    },
+    }],
 
     delete : async (req, res) => {
         const categoryId = parseInt(req.params.id);

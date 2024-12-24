@@ -1,6 +1,7 @@
 import { Announcement } from "../models/announcement.model.js";
 import { Category } from "../models/category.model.js";
 import '../models/associations.js';
+import sanitizeHtml from 'sanitize-html';
 
 const announcementController = {
   getAll: async (req, res) => {
@@ -48,7 +49,7 @@ const announcementController = {
 },
 
 
-  insert: async (req, res) => {
+  insert: [sanitizeHtml, async (req, res) => {
     const {
       picture,
       title,
@@ -87,9 +88,9 @@ const announcementController = {
     console.error("Erreur lors de l'insertion de l'annonce :", error);
     res.status(500).json({ error: "Erreur serveur" });
     }
-  },
+  }],
 
-  update: async (req, res) => {
+  update:  [sanitizeHtml, async (req, res) => {
     const announcementId = parseInt(req.params.id);
 
     if (!announcementId) {
@@ -132,7 +133,7 @@ const announcementController = {
     console.error("Erreur lors de la mise à jour de l'annonce :", error);
     res.status(500).json({ error: "Erreur serveur" });
   }
-  },
+  }],
 
   delete: async (req, res) => {
     const announcementId = parseInt(req.params.id);

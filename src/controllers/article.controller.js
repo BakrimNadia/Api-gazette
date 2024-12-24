@@ -1,6 +1,7 @@
 import { Article } from "../models/article.model.js";
 import { User } from "../models/user.model.js";
 import '../models/associations.js';
+import sanitizeHtml from 'sanitize-html';
 
 
 const articleController = {
@@ -46,7 +47,7 @@ const articleController = {
   }
 },
 
-  insert: async (req, res) => {
+  insert: [ sanitizeHtml, async (req, res) => {
     const {
       picture,
       title,
@@ -82,9 +83,9 @@ const articleController = {
     console.error("Erreur lors de l'insertion de l'article :", error);
     res.status(500).json({ error: "Erreur serveur" });
     }
-  },
+  }],
 
-  update: async (req, res) => {
+  update: [ sanitizeHtml, async (req, res) => {
     const articleId = parseInt(req.params.id);
 
     if (!articleId) {
@@ -123,7 +124,7 @@ const articleController = {
     console.error("Erreur lors de la modification de l'article :", error);
     res.status(500).json({ error: "Erreur serveur" });
     }
-  },
+  }],
 
   delete: async (req, res) => {
     const articleId = parseInt(req.params.id);
