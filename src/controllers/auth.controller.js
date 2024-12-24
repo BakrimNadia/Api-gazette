@@ -15,7 +15,6 @@ const authController = {
       password,
       confirmPassword,
       role,
-      is_active,
     } = req.body;
 
     if (

@@ -11,7 +11,8 @@ console.log(typeof database);
 export const sequelize = new Sequelize(database , {
   dialectModule: pg,
   define: {
-    timestamps: false,
+    createdAt: 'created_at',
+    updatedAt: 'updated_at',
   },
   logging: false,
 });

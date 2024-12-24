@@ -1,12 +1,13 @@
 {
   "name": "api-gazette-collegues",
   "version": "1.0.0",
-  "description": "",
+  "description": "gazette API",
   "main": "index.js",
   "type": "module",
   "scripts": {
     "start": "node src/server.js",
     "dev": "nodemon src/server.js",
+    "test": "mocha --recursive ./src/**/*.test.js --require test.config.js --require test.hooks.js",
     "db:create": "node src/migrations/create-tables.js",
     "db:seed": "node src/migrations/seed-tables.js",
     "db:reset": "npm run db:create && npm run db:seed"
@@ -16,6 +17,7 @@
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^5.1.1",
+    "cors": "^2.8.5",
     "dotenv": "^16.4.5",
     "email-validator": "^2.0.4",
     "express": "^4.21.1",
@@ -25,8 +27,9 @@
     "sequelize": "^6.37.4"
   },
   "devDependencies": {
-    "cors": "^2.8.5",
+    "chai": "^5.1.2",
     "eslint": "^9.17.0",
+    "mocha": "^11.0.1",
     "nodemon": "^3.1.7"
   }
 }

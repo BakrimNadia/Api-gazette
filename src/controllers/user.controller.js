@@ -68,7 +68,9 @@ const userController = {
         password,
         role,
         is_active,
-      });
+      },
+        { where: { id: userId } }
+    );
 
       res.json(user);
     } catch (error) {

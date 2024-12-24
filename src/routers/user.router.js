@@ -5,5 +5,5 @@ export const router = Router();
 
 router.get('/users', userController.getAll);
 router.get('/users/:id', userController.getById);
-router.post('/users/patch', userController.update);
-router.post('/user/delete', userController.softDelete);
+router.patch('/users/patch', userController.update);
+router.patch('/user/delete', userController.softDelete);
