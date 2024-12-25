@@ -7,6 +7,7 @@ import { User } from "../models/user.model.js";
 
 const authController = {
   register: async (req, res) => {
+    try {
     const {
       avatar,
       email,
@@ -36,6 +37,17 @@ const authController = {
         .send("Le mot de passe et sa confirmation ne correspondent pas.");
     }
 
+    if (password.length < 8) {
+      return res.status(400).send("Le mot de passe doit contenir au moins 8 caractères.");
+    }
+    
+    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/;
+    if (!passwordRegex.test(password)) {
+      return res.status(400).send(
+        "Le mot de passe doit contenir au moins une majuscule, un chiffre et un caractère spécial."
+      );
+    }    
+
     if (!emailValidator.validate(email)) {
       console.log("Le format de l'email n'est pas valide.");
       return res.status(400).send("Le format de l'email n'est pas valide.");
@@ -61,9 +73,15 @@ const authController = {
     });
 
     res.status(200).json("succesfully create user");
+  }
+  catch (error) {
+    console.error("Erreur lors de la création de l'utilisateur :", error);
+    res.status(500).json({ error: "Erreur serveur" });
+  }
   },
 
   login: async (req, res) => {
+    try {
     const { email, password } = req.body;
 
     if (!email || !password) {
@@ -99,6 +117,11 @@ const authController = {
     };
 
     res.json(loginData);
+  }
+  catch (error) {
+    console.error("Erreur lors de la connexion de l'utilisateur :", error);
+    res.status(500).json({ error: "Erreur serveur" });
+    }
   },
 };
 

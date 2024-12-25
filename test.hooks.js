@@ -1,5 +1,5 @@
-import { sequelize } from "./src/models/index.js";
-import { app } from "./app.js";
+import { sequelize } from "./src/models/model.js";
+import { app } from "./src/app.js";
 
 let server;
 
