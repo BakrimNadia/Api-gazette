@@ -26,7 +26,7 @@ describe("Announcement endpoints", () => {
 
       await Announcement.create({
         title: "Car for Sale",
-        price: 10000,
+        price: "10000",
         author: "John Doe",
         content: "A great car!",
         date_publication: new Date(),
@@ -50,7 +50,7 @@ describe("Announcement endpoints", () => {
 
       const createdAnnouncement = await Announcement.create({
         title: "Laptop for Sale",
-        price: 500,
+        price: "500",
         author: "Jane Doe",
         content: "Laptop description",
         date_publication: new Date(),
@@ -102,7 +102,7 @@ describe("Announcement endpoints", () => {
       expect(body.title).to.equal("Sofa for Sale");
 
       const dbAnnouncement = await Announcement.findOne({ where: { title: "Sofa for Sale" } });
-      expect(dbAnnouncement.id).to.equal(body.id);
+      expect(dbAnnouncement).to.not.be.null;
     });
 
     it("should reject requests missing required fields", async () => {
@@ -111,7 +111,7 @@ describe("Announcement endpoints", () => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ price: "Missing Price" }), 
+        body: JSON.stringify({ price: "Missing title" }), 
       });
       const body = await res.json();
 

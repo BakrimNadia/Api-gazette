@@ -16,7 +16,7 @@ Announcement.init(
   }, 
   price: { 
     type: DataTypes.STRING(255), 
-    allowNull: true 
+    allowNull: false 
   }, 
   author: { 
     type: DataTypes.STRING(255), 
