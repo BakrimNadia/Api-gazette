@@ -6,50 +6,47 @@ import sanitizeHtml from 'sanitize-html';
 const announcementController = {
   getAll: async (req, res) => {
     try {
-    const announcementList = await Announcement.findAll(
-      {
+      const announcementList = await Announcement.findAll({
         include: [{
           model: Category,
           as: 'category',
-          attributes: ['id','name'], 
+          attributes: ['name'],
         }]
-      }
-    );
-    res.json(announcementList);
-  } catch (error) {
-    console.error("Erreur lors de la récupération des annonces :", error);
-    res.status(500).json({ error: "Erreur serveur" });
-  }
+      });
+      res.json(announcementList);
+    } catch (error) {
+      console.error("Erreur lors de la récupération des annonces :", error);
+      res.status(500).json({ error: "Erreur serveur" });
+    }
   },
 
   getById: async (req, res) => {
     const announcementId = parseInt(req.params.id);
 
     if (!announcementId) {
-      return res.status(404).json({ error: "id inconnu" });
+      return res.status(404).json({ error: "ID inconnu" });
     }
+
     try {
-    const announcement = await Announcement.findByPk(announcementId, {
-      include: [{
-        model: Category,
-        as: 'category',
-        attributes: ['id','name'],
-      }]
-    }
-    );
-    if (!announcement) {
-      return res.status(404).json({ error: "annonce inconnu" });
-    }
-    res.json(announcement);
-  
+      const announcement = await Announcement.findByPk(announcementId, {
+        include: [{
+          model: Category,
+          as: 'category',
+          attributes: ['name'],
+        }]
+      });
+
+      if (!announcement) {
+        return res.status(404).json({ error: "Annonce inconnue" });
+      }
+      res.json(announcement);
     } catch (error) {
-  console.error("Erreur lors de la récupération de l'annonce :", error);
-  res.status(500).json({ error: "Erreur serveur" });
-}
-},
+      console.error("Erreur lors de la récupération de l'annonce :", error);
+      res.status(500).json({ error: "Erreur serveur" });
+    }
+  },
 
-
-  insert: [sanitizeHtml, async (req, res) => {
+  insert: async (req, res) => {
     const {
       picture,
       title,
@@ -59,42 +56,39 @@ const announcementController = {
       date_publication,
       category_id,
     } = req.body;
-    if (
-      !title ||
-      !price ||
-      !author ||
-      !content ||
-      !date_publication ||
-      !category_id
-    ) {
-      console.log("Tous les champs sont obligatoire");
-      return res
-        .status(400)
-        .json({ error: "Tous les champs sont obligatoire" });
-    }
-    try {
-    const newAnnouncement = {
-      picture,
-      title,
-      price,
-      author,
-      content,
-      date_publication: date_publication,
-      category_id,
-    };
-    await Announcement.create(newAnnouncement);
-    res.status(201).json(newAnnouncement);
-  } catch (error) {
-    console.error("Erreur lors de l'insertion de l'annonce :", error);
-    res.status(500).json({ error: "Erreur serveur" });
-    }
-  }],
 
-  update:  [sanitizeHtml, async (req, res) => {
+    if (!title || !price || !author || !content || !date_publication || !category_id) {
+      console.log("Tous les champs sont obligatoires");
+      return res.status(400).json({ error: "Tous les champs sont obligatoires" });
+    }
+
+    try {
+      const sanitizedContent = sanitizeHtml(content);
+      const sanitizedTitle = sanitizeHtml(title);
+
+      const newAnnouncement = {
+        picture,
+        title: sanitizedTitle,
+        price,
+        author,
+        content: sanitizedContent,
+        date_publication,
+        category_id,
+      };
+
+      await Announcement.create(newAnnouncement);
+      res.status(201).json(newAnnouncement);
+    } catch (error) {
+      console.error("Erreur lors de l'insertion de l'annonce :", error);
+      res.status(500).json({ error: "Erreur serveur" });
+    }
+  },
+
+  update: async (req, res) => {
     const announcementId = parseInt(req.params.id);
 
     if (!announcementId) {
-      return res.status(404).json({ error: "id inconnu" });
+      return res.status(404).json({ error: "ID inconnu" });
     }
 
     const {
@@ -107,56 +101,60 @@ const announcementController = {
       category_id,
     } = req.body;
 
+    if (!title || !price || !author || !content || !date_publication || !category_id) {
+      return res.status(400).json({ error: "Tous les champs sont obligatoires" });
+    }
+
     try {
-    const announcement = await Announcement.findByPk(announcementId);
+      const announcement = await Announcement.findByPk(announcementId);
 
-    if (!announcement) {
-      return res.status(404).json({ error: "annonce inconnu" });
-    }
+      if (!announcement) {
+        return res.status(404).json({ error: "Annonce inconnue" });
+      }
 
-    const updateAnnouncement = await announcement.update({
-      picture,
-      title,
-      price,
-      author,
-      content,
-      date_publication,
-      category_id,
-    }
-    , {
-      where: { id: announcementId },
-    }
-  );
+      const sanitizedContent = sanitizeHtml(content);
+      const sanitizedTitle = sanitizeHtml(title);
 
-    res.json(updateAnnouncement);
-  } catch (error) {
-    console.error("Erreur lors de la mise à jour de l'annonce :", error);
-    res.status(500).json({ error: "Erreur serveur" });
-  }
-  }],
+      const updatedAnnouncement = await announcement.update({
+        picture,
+        title: sanitizedTitle,
+        price,
+        author,
+        content: sanitizedContent,
+        date_publication,
+        category_id,
+      });
+
+      res.json(updatedAnnouncement);
+    } catch (error) {
+      console.error("Erreur lors de la mise à jour de l'annonce :", error);
+      res.status(500).json({ error: "Erreur serveur" });
+    }
+  },
 
   delete: async (req, res) => {
     const announcementId = parseInt(req.params.id);
 
     if (!announcementId) {
-      return res.status(404).json({ error: "id inconnu" });
+      return res.status(404).json({ error: "ID inconnu" });
     }
+
     try {
-    const announcement = await Announcement.findByPk(announcementId);
+      const announcement = await Announcement.findByPk(announcementId);
 
-    if (!announcement) {
-      return res.status(404).json({ error: "Annonce inconnue" });
+      if (!announcement) {
+        return res.status(404).json({ error: "Annonce inconnue" });
+      }
+
+      await Announcement.destroy({
+        where: { id: announcementId },
+      });
+
+      res.status(200).json({ message: "Annonce supprimée avec succès" });
+    } catch (error) {
+      console.error("Erreur lors de la suppression de l'annonce :", error);
+      res.status(500).json({ error: "Erreur serveur" });
     }
-
-    await Announcement.destroy({
-      where: { id: announcementId },
-    });
-
-    res.status(200).json({ message: "Annonce supprimée avec succès" });
-  } catch (error) {
-    console.error("Erreur lors de la suppression de l'annonce :", error);
-    res.status(500).json({ error: "Erreur serveur" });
-  }
   },
 };
 

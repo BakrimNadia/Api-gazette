@@ -3,7 +3,6 @@ import { User } from "../models/user.model.js";
 import '../models/associations.js';
 import sanitizeHtml from 'sanitize-html';
 
-
 const articleController = {
   getAll: async (req, res) => {
     try {
@@ -11,7 +10,7 @@ const articleController = {
         include: [{
           model: User,
           as: 'articleAuthor',
-          attributes: ['firstname', 'lastname'], 
+          attributes: ['firstname', 'lastname'],
         }]
       });
       res.json(articleList);
@@ -25,29 +24,29 @@ const articleController = {
     const articleId = parseInt(req.params.id);
 
     if (!articleId) {
-      return res.status(404).json({ error: "id inconnu" });
+      return res.status(404).json({ error: "ID inconnu" });
     }
     try {
-    const article = await Article.findByPk(articleId, {
-      include: [{
-        model: User,
-        as: 'articleAuthor',
-        attributes: ['firstname', 'lastname'], 
-      }]
-    });
+      const article = await Article.findByPk(articleId, {
+        include: [{
+          model: User,
+          as: 'articleAuthor',
+          attributes: ['firstname', 'lastname'],
+        }]
+      });
 
-    if (!article) {
-      return res.status(404).json({ error: "Article inconnu" });
+      if (!article) {
+        return res.status(404).json({ error: "Article inconnu" });
+      }
+
+      res.json(article);
+    } catch (error) {
+      console.error("Erreur lors de la récupération de l'article :", error);
+      res.status(500).json({ error: "Erreur serveur" });
     }
+  },
 
-    res.json(article);
-  } catch (error) {
-    console.error("Erreur lors de la récupération de l'article :", error);
-    res.status(500).json({ error: "Erreur serveur" });
-  }
-},
-
-  insert: [ sanitizeHtml, async (req, res) => {
+  insert: async (req, res) => {
     const {
       picture,
       title,
@@ -56,40 +55,36 @@ const articleController = {
       content,
       date_publication,
     } = req.body;
-    if (
-      !title ||
-      !subtitle ||
-      !user_id ||
-      !content ||
-      !date_publication
-    ) {
-      console.log("Tous les champs sont obligatoire");
-      return res
-        .status(400)
-        .json({ error: "Tous les champs sont obligatoire" });
+
+    if (!title || !subtitle || !user_id || !content || !date_publication) {
+      console.log("Tous les champs sont obligatoires");
+      return res.status(400).json({ error: "Tous les champs sont obligatoires" });
     }
 
     try {
-    const newArticle = await Article.create({
-      picture,
-      title,
-      subtitle,
-      user_id,
-      content,
-      date_publication,
-    });
-    res.status(201).json(newArticle);
-  } catch (error) {
-    console.error("Erreur lors de l'insertion de l'article :", error);
-    res.status(500).json({ error: "Erreur serveur" });
-    }
-  }],
+      const sanitizedContent = sanitizeHtml(content);
 
-  update: [ sanitizeHtml, async (req, res) => {
+      const newArticle = await Article.create({
+        picture,
+        title,
+        subtitle,
+        user_id,
+        content: sanitizedContent,
+        date_publication,
+      });
+
+      res.status(201).json(newArticle);
+    } catch (error) {
+      console.error("Erreur lors de l'insertion de l'article :", error);
+      res.status(500).json({ error: "Erreur serveur" });
+    }
+  },
+
+  update: async (req, res) => {
     const articleId = parseInt(req.params.id);
 
     if (!articleId) {
-      return res.status(404).json({ error: "id inconnu" });
+      return res.status(404).json({ error: "ID inconnu" });
     }
 
     const {
@@ -101,53 +96,57 @@ const articleController = {
       date_publication,
     } = req.body;
 
+    if (!title || !subtitle || !user_id || !content || !date_publication) {
+      return res.status(400).json({ error: "Tous les champs sont obligatoires" });
+    }
+
     try {
-    const article = await Article.findByPk(articleId);
+      const article = await Article.findByPk(articleId);
 
-    if (!article) {
-      return res.status(404).json({ error: "Article inconnu" });
-    }
+      if (!article) {
+        return res.status(404).json({ error: "Article inconnu" });
+      }
 
-    const updateArticle = await article.update({
-      picture,
-      title,
-      subtitle,
-      user_id,
-      content,
-      date_publication,
-    }
-    , {where: { id: articleId }}
-  );
+      const sanitizedContent = sanitizeHtml(content);
 
-    res.json(updateArticle);
+      const updatedArticle = await article.update({
+        picture,
+        title,
+        subtitle,
+        user_id,
+        content: sanitizedContent,
+        date_publication,
+      });
+
+      res.json(updatedArticle);
     } catch (error) {
-    console.error("Erreur lors de la modification de l'article :", error);
-    res.status(500).json({ error: "Erreur serveur" });
+      console.error("Erreur lors de la modification de l'article :", error);
+      res.status(500).json({ error: "Erreur serveur" });
     }
-  }],
+  },
 
   delete: async (req, res) => {
     const articleId = parseInt(req.params.id);
 
     if (!articleId) {
-      return res.status(404).json({ error: "id inconnu" });
+      return res.status(404).json({ error: "ID inconnu" });
     }
 
-    try {  
-    const article = await Article.findByPk(articleId);
+    try {
+      const article = await Article.findByPk(articleId);
 
-    if (!article) {
-      return res.status(404).json({ error: "article inconnue" });
-    }
+      if (!article) {
+        return res.status(404).json({ error: "Article inconnu" });
+      }
 
-    await Article.destroy({
-      where: { id: articleId },
-    });
+      await Article.destroy({
+        where: { id: articleId },
+      });
 
-    res.status(200).json({ message: "Article supprimée avec succès" });
+      res.status(200).json({ message: "Article supprimé avec succès" });
     } catch (error) {
-    console.error("Erreur lors de la suppression de l'article :", error);
-    res.status(500).json({ error: "Erreur serveur" });
+      console.error("Erreur lors de la suppression de l'article :", error);
+      res.status(500).json({ error: "Erreur serveur" });
     }
   },
 };

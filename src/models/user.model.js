@@ -26,7 +26,7 @@ User.init(
         allowNull: false,
       },
       role: {
-        type: DataTypes.STRING(10),
+        type: DataTypes.STRING(125),
         allowNull: false,
       },
       is_active: {

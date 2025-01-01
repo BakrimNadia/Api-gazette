@@ -33,7 +33,7 @@ const userController = {
     }
   },
 
-  update: [ sanitizeHtml, async (req, res) => {
+  update: async (req, res) => {
     const userId = parseInt(req.params.id);
 
     if (!userId) {
@@ -61,26 +61,29 @@ const userController = {
         return res.status(400).json({ error: "Tous les champs sont obligatoires" });
       }
 
+      const sanitizedFirstname = sanitizeHtml(firstname);
+      const sanitizedLastname = sanitizeHtml(lastname);
+      const sanitizedEmail = sanitizeHtml(email);
+      const sanitizedAvatar = sanitizeHtml(avatar);
+
       await user.update({
-        avatar,
-        lastname,
-        firstname,
-        email,
+        avatar: sanitizedAvatar,
+        lastname: sanitizedLastname,
+        firstname: sanitizedFirstname,
+        email: sanitizedEmail,
         password,
         role,
         is_active,
-      },
-        { where: { id: userId } }
-    );
+      });
 
       res.json(user);
     } catch (error) {
       console.error("Erreur lors de la mise à jour de l'utilisateur :", error);
       res.status(500).json({ error: "Erreur serveur" });
     }
-  }],
+  },
 
-  softDelete: [ sanitizeHtml, async (req, res) => {
+  softDelete: async (req, res) => {
     const email = req.body.email;
 
     if (!email) {
@@ -88,7 +91,8 @@ const userController = {
     }
 
     try {
-      const user = await User.findOne({ where: { email } });
+      const sanitizedEmail = sanitizeHtml(email);
+      const user = await User.findOne({ where: { email: sanitizedEmail } });
 
       if (!user) {
         return res.status(404).json({ error: "Utilisateur non trouvé" });
@@ -102,7 +106,7 @@ const userController = {
       console.error("Erreur lors de la désactivation de l'utilisateur :", error);
       res.status(500).json({ error: "Erreur serveur" });
     }
-  }],
+  },
 };
 
 export default userController;

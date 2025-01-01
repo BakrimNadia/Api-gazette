@@ -1,3 +1,4 @@
+
 import { sequelize } from "./src/models/model.js";
 import { app } from "./src/app.js";
 
@@ -11,7 +12,7 @@ export const mochaHooks = {
     await sequelize.sync();
 
     // Start the server
-    server = await app.listen(process.env.PORT);
+    server = await app.listen(process.env.PORT || 3001);
   },
 
   // Function after tests

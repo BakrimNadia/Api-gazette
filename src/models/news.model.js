@@ -6,7 +6,7 @@ export class News extends Model {}
 News.init(
     {
   picture: {
-    type: DataTypes.STRING,
+    type: DataTypes.STRING(255),
     allowNull: true
       }, 
   title: { 

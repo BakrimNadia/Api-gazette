@@ -1,6 +1,6 @@
 import { Model, DataTypes } from "sequelize";
 import sequelize from "../database.js";
-import { Category } from "./category.model.js";
+
 
 export class Announcement extends Model {}
 
@@ -33,8 +33,9 @@ Announcement.init(
   },
   category_id: { 
     type: DataTypes.INTEGER,
+    allowNull: true,
     references: {
-      model: Category,
+      model: "category",
       key: 'id',
     },
     allowNull: false,

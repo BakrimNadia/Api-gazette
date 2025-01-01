@@ -1,170 +1,167 @@
-import * as chai from "chai";
-import chaiHttp from "chai-http";
-import { app } from "../app.js";
+import { describe, it } from "mocha";
+import { expect } from "chai";
 import { News } from "../models/news.model.js";
 import { User } from "../models/user.model.js";
-import faker from "faker";
+import { app } from '../app.js';
+import { createServer } from "http";
 
-const { expect } = chai;
-chai.use(chaiHttp);
+const server = createServer(app);
+const apiBaseUrl = `http://localhost:${process.env.PORT || 3001}/api/v1`;
 
-let testUser;
-let testNews;
+// Tests des endpoints pour les news
+describe("News endpoints", () => {
+  describe("[GET] /news", () => {
+    it("should return an empty array when no news exists", async () => {
+      const res = await fetch(`${apiBaseUrl}/news`);
+      const body = await res.json();
 
-describe("News Controller", () => {
-
-  // Créer un utilisateur et une news avant chaque test
-  beforeEach(async () => {
-    testUser = await User.create({
-      email: faker.internet.email(),
-      firstname: faker.name.firstName(),
-      lastname: faker.name.lastName(),
-      password: "password123",
-      role: "user",
+      expect(res.status).to.equal(200);
+      expect(body.length).to.equal(0);
     });
 
-    testNews = await News.create({
-      title: "News de Test",
-      subtitle: "Sous-titre test",
-      content: "Contenu d'article de test",
-      user_id: testUser.id,
-      date_publication: new Date(),
-    });
-  });
+    it("should return all news with authors", async () => {
+      const user = await User.create({
+        firstname: "John",
+        lastname: "Doe",
+        email: "john.doe@example.com",
+        password: "securepassword",
+        role: "user"
+      });
+      await News.create({
+        title: "Breaking News",
+        subtitle: "Latest Update",
+        user_id: user.id,
+        content: "Some important content",
+        date_publication: new Date(),
+      });
 
-  // ======= TESTS =======
+      const res = await fetch(`${apiBaseUrl}/news`);
+      const body = await res.json();
 
-  // 1. Test pour récupérer toutes les news
-  describe("GET /news", () => {
-    it("devrait retourner toutes les news", (done) => {
-      chai
-        .request(app)
-        .get("/news")
-        .end((err, res) => {
-          expect(res).to.have.status(200);
-          expect(res.body).to.be.an("array");
-          expect(res.body.length).to.be.greaterThan(0);
-          done();
-        });
+      expect(res.status).to.equal(200);
+      expect(body[0].title).to.equal("Breaking News");
+      expect(body[0].newsAuthor.firstname).to.equal("John");
     });
   });
 
-  // 2. Test pour récupérer une news par ID
-  describe("GET /news/:id", () => {
-    it("devrait retourner une news avec un ID valide", (done) => {
-      chai
-        .request(app)
-        .get(`/news/${testNews.id}`)
-        .end((err, res) => {
-          expect(res).to.have.status(200);
-          expect(res.body).to.have.property("title", "News de Test");
-          done();
-        });
+  describe("[GET] /news/:id", () => {
+    it("should return the requested news by ID", async () => {
+      const user = await User.create({
+        firstname: "Jane",
+        lastname: "Smith",
+        email: "jane.smith@example.com",
+        password: "securepassword",
+        role: "user"
+      });
+      const createdNews = await News.create({
+        title: "Tech News",
+        subtitle: "Innovations",
+        user_id: user.id,
+        content: "Some tech content",
+        date_publication: new Date(),
+      });
+
+      const res = await fetch(`${apiBaseUrl}/news/${createdNews.id}`);
+      const body = await res.json();
+
+      expect(res.status).to.equal(200);
+      expect(body.title).to.equal("Tech News");
+      expect(body.newsAuthor.firstname).to.equal("Jane");
     });
 
-    it("devrait retourner une erreur 404 pour un ID inexistant", (done) => {
-      chai
-        .request(app)
-        .get("/news/99999")
-        .end((err, res) => {
-          expect(res).to.have.status(404);
-          expect(res.body).to.have.property("error", "Note d'information inconnue");
-          done();
-        });
+    it("should return 404 if news does not exist", async () => {
+      const res = await fetch(`${apiBaseUrl}/news/999`);
+      const body = await res.json();
+
+      expect(res.status).to.equal(404);
+      expect(body.error).to.equal("Note d'information inconnue");
     });
   });
 
-  // 3. Test pour ajouter une nouvelle news
-  describe("POST /news", () => {
-    it("devrait créer une nouvelle news", (done) => {
-      chai
-        .request(app)
-        .post("/news")
-        .send({
-          title: "Nouvelle News",
-          subtitle: "Sous-titre",
-          content: "Contenu de la news",
-          user_id: testUser.id,
-          date_publication: new Date(),
-        })
-        .end((err, res) => {
-          expect(res).to.have.status(201);
-          expect(res.body).to.have.property("title", "Nouvelle News");
-          done();
-        });
+  describe("[POST] /news", () => {
+    it("should create a news entry in the database", async () => {
+      const user = await User.create({
+        firstname: "Alice",
+        lastname: "Brown",
+        email: "alice.brown@example.com",
+        password: "securepassword",
+        role: "user"
+      });
+      const newNews = {
+        title: "Market Update",
+        subtitle: "Stock Prices",
+        user_id: user.id,
+        content: "Market details",
+        date_publication: new Date(),
+      };
+
+      const res = await fetch(`${apiBaseUrl}/news`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(newNews),
+      });
+      const body = await res.json();
+
+      expect(res.status).to.equal(201);
+      expect(body.title).to.equal("Market Update");
+
+      const dbNews = await News.findOne({ where: { title: "Market Update" } });
+      expect(dbNews.id).to.equal(body.id);
     });
 
-    it("devrait retourner une erreur 400 si un champ est manquant", (done) => {
-      chai
-        .request(app)
-        .post("/news")
-        .send({
-          title: "",
-          subtitle: "",
-        })
-        .end((err, res) => {
-          expect(res).to.have.status(400);
-          expect(res.body).to.have.property("error", "Tous les champs sont obligatoires");
-          done();
-        });
+    it("should reject requests missing required fields", async () => {
+      const res = await fetch(`${apiBaseUrl}/news`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ subtitle: "Missing Title" }),
+      });
+      const body = await res.json();
+
+      expect(res.status).to.equal(400);
+      expect(body.error).to.equal("Tous les champs sont obligatoires");
     });
   });
 
-  // 4. Test pour mettre à jour une news
-  describe("PUT /news/:id", () => {
-    it("devrait mettre à jour une news existante", (done) => {
-      chai
-        .request(app)
-        .put(`/news/${testNews.id}`)
-        .send({
-          title: "News Mise à Jour",
-          subtitle: "Nouveau Sous-titre",
-          content: "Contenu mis à jour",
-        })
-        .end((err, res) => {
-          expect(res).to.have.status(200);
-          expect(res.body).to.have.property("title", "News Mise à Jour");
-          done();
-        });
-    });
+  describe("[DELETE] /news/:id", () => {
+    it("should delete the requested news by ID", async () => {
+      const user = await User.create({
+        firstname: "Jane",
+        lastname: "Doe",
+        email: "jane.doe@example.com",
+        password: "securepassword",
+        role: "user"
+      });
+    
+      // Créer une news en associant l'utilisateur
+      const news = await News.create({
+        title: "Tech Update",
+        subtitle: "Latest Tech News",
+        user_id: user.id,
+        content: "Some tech content",
+        date_publication: new Date(),
+      });
 
-    it("devrait retourner une erreur 404 si la news n'existe pas", (done) => {
-      chai
-        .request(app)
-        .put("/news/99999")
-        .send({
-          title: "Non-existant",
-        })
-        .end((err, res) => {
-          expect(res).to.have.status(404);
-          expect(res.body).to.have.property("error", "Note d'information inconnue");
-          done();
-        });
-    });
-  });
-
-  // 5. Test pour supprimer une news
-  describe("DELETE /news/:id", () => {
-    it("devrait supprimer une news", (done) => {
-      chai
-        .request(app)
-        .delete(`/news/${testNews.id}`)
-        .end((err, res) => {
-          expect(res).to.have.status(200);
-          expect(res.body).to.have.property("message", "Note d'information supprimée avec succès");
-          done();
-        });
-    });
-
-    it("devrait retourner une erreur 404 si l'ID est inconnu", (done) => {
-      chai
-        .request(app)
-        .delete("/news/99999")
-        .end((err, res) => {
-          expect(res).to.have.status(404);
-          expect(res.body).to.have.property("error", "Note d'information inconnue");
-          done();
-        });
-    });
-  });
+      const res = await fetch(`${apiBaseUrl}/news/${news.id}`, {
+        method: "DELETE",
+      });
+        const body = await res.json();
+        
+              expect(res.status).to.equal(200);
+              expect(body.message).to.equal("News supprimée avec succès");
+            });
+        
+            it("should return 404 if news to delete does not exist", async () => {
+              const res = await fetch(`${apiBaseUrl}/news/999`, {
+                method: "DELETE",
+              });
+              const body = await res.json();
+        
+              expect(res.status).to.equal(404);
+              expect(body.error).to.equal("News inconnue");
+            });
+      });
 });
