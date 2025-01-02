@@ -110,11 +110,13 @@ const articleController = {
       }
 
       const sanitizedContent = sanitizeHtml(content);
+      const sanitizedSubtitle = sanitizeHtml(subtitle);
+      const sanitizedTitle = sanitizeHtml(title);
 
       const updatedArticle = await article.update({
         picture,
-        title,
-        subtitle,
+        title: sanitizedTitle,
+        subtitle: sanitizedSubtitle,
         user_id,
         content: sanitizedContent,
         date_publication,

@@ -110,11 +110,13 @@ const newsController = {
       }
 
       const sanitizedContent = sanitizeHtml(content);
+      const sanitizedTitle = sanitizeHtml(title);
+      const sanitizedSubtitle = sanitizeHtml(subtitle);
 
       await news.update({
         picture,
-        title,
-        subtitle,
+        title: sanitizedTitle,
+        subtitle: sanitizedSubtitle,
         user_id,
         content: sanitizedContent,
         date_publication,
