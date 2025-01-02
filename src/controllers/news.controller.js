@@ -63,11 +63,13 @@ const newsController = {
 
     try {
       const sanitizedContent = sanitizeHtml(content);
+      const sanitizedTitle = sanitizeHtml(title);
+      const sanitizedSubtitle = sanitizeHtml(subtitle);
 
       const newNews = await News.create({
         picture,
-        title,
-        subtitle,
+        title: sanitizedTitle,
+        subtitle: sanitizedSubtitle,
         user_id,
         content: sanitizedContent,
         date_publication,

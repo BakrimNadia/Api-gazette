@@ -63,11 +63,13 @@ const articleController = {
 
     try {
       const sanitizedContent = sanitizeHtml(content);
+      const sanitizedSubtitle = sanitizeHtml(subtitle);
+      const sanitizedTitle = sanitizeHtml(title);
 
       const newArticle = await Article.create({
         picture,
-        title,
-        subtitle,
+        title: sanitizedTitle,
+        subtitle: sanitizedSubtitle,
         user_id,
         content: sanitizedContent,
         date_publication,
