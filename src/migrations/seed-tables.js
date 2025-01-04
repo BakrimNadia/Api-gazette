@@ -1,4 +1,4 @@
-import bcrypt from "bcrypt";
+import bcrypt from "bcryptjs";
 import "dotenv/config";
 import { News, Article, Announcement, User, Category } from "../models/associations.js";
 
