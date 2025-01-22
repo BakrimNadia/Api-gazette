@@ -5,14 +5,14 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "build": "node src/server.js",
+    "build": "npm install && npm run db:reset",
     "start": "node src/server.js",
     "dev": "nodemon src/server.js",
     "test": "mocha --recursive --no-timeout ./src/**/*.test.js --require test.config.js --require test.hooks.js",
     "db:create": "node src/migrations/create-tables.js",
     "db:seed": "node src/migrations/seed-tables.js",
-    "db:reset": "npm run db:create && npm run db:seed",
-    "render:build": "npm install && npm run db:reset"
+    "db:reset": "npm run db:create && npm run db:seed"
+   // "render:build": "npm install && npm run db:reset"
   },
   "keywords": [],
   "author": "",
